@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#12151c">
+<title>My Portfolio | Stackly Commercial Realty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* STACKLY COMMERCIAL REALTY — client dashboard (charcoal ink + copper on warm stone) */
+:root{--ink:#12151c;--ink-2:#1a1f2b;--ink-3:#283046;--copper:#d9733f;--copper-2:#ee9a6b;--copper-d:#c4592b;--accent-d:#b04e22;--stone:#f6f2ec;--sand:#ebe4da;--text:#1b1e27;--muted:#5d6470;--line:rgba(18,21,28,.12);--ok:#2e8b57;--bad:#d64045;--blue:#3d6fb4;--amber:#d99a10;--fh:'Playfair Display',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif;--ease:cubic-bezier(.2,.8,.2,1);--sw:260px}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{max-width:100%;overflow-x:clip}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:var(--fb);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased;background:var(--stone) radial-gradient(rgba(18,21,28,.07) 1px,transparent 1px) 0 0/26px 26px}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}a{color:inherit}ul{list-style:none}
+:focus-visible{outline:2px solid var(--copper-d);outline-offset:2px}
+.app{display:flex;min-height:100vh}
+/* sidebar */
+.side{position:fixed;inset:0 auto 0 0;width:min(var(--sw),86vw);z-index:50;display:flex;flex-direction:column;padding:22px 16px 16px;overflow-y:auto;isolation:isolate;color:var(--stone);background:linear-gradient(170deg,var(--ink),#0c0f15)}
+.side::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(rgba(246,242,236,.05) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(246,242,236,.05) 1px,transparent 1px) 0 0/40px 40px;-webkit-mask-image:linear-gradient(#000,transparent 85%);mask-image:linear-gradient(#000,transparent 85%)}
+.side::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(280px circle at var(--mx,50%) var(--my,8%),rgba(217,115,63,.22),transparent 65%)}
+.side-head{position:relative;display:flex;justify-content:center;margin-bottom:16px}
+.brand img{height:54px;max-width:100%;width:auto;display:block}
+.x{display:none;position:absolute;right:0;top:50%;transform:translateY(-50%);width:34px;height:34px;color:rgba(246,242,236,.7)}
+.pill{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:6px;border-radius:12px;background:rgba(246,242,236,.07);border:1px solid rgba(246,242,236,.15);font-size:.82rem}
+.pill b{display:block;font-weight:600}.pill small{opacity:.6;font-size:.72rem}
+.live{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--copper-2);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(238,154,107,0)}0%{box-shadow:0 0 0 0 rgba(238,154,107,.7)}}
+.grp{font-size:.7rem;letter-spacing:1.4px;text-transform:uppercase;color:rgba(246,242,236,.42);margin:18px 8px 6px}
+.nav{display:grid;gap:2px}
+.nav button{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border-radius:10px;text-align:left;font-size:.9rem;font-weight:500;color:rgba(246,242,236,.76);transition:background .2s,color .2s,transform .2s}
+.nav button i{width:18px;text-align:center;font-size:.9rem}
+.nav button:hover{background:rgba(246,242,236,.09);color:#fff;transform:translateX(3px)}
+.nav button.on{background:var(--copper-d);color:#fff;font-weight:600;box-shadow:0 10px 22px -10px rgba(196,89,43,.9)}
+.nav .n{margin-left:auto;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--stone);color:var(--ink)}
+.side-cta{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;padding:12px;border-radius:40px;font-weight:700;font-size:.9rem;background:var(--stone);color:var(--ink);transition:transform .2s,box-shadow .2s}
+.side-cta:hover{transform:translateY(-2px);box-shadow:0 12px 22px -10px rgba(0,0,0,.6)}
+.side-user{display:flex;align-items:center;gap:10px;margin-top:22px;padding:10px;border-radius:12px;background:rgba(246,242,236,.07);border:1px solid rgba(246,242,236,.12)}
+.side-user div{min-width:0}.side-user b{display:block;font-size:.85rem;text-transform:capitalize;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.side-user small{display:block;font-size:.72rem;opacity:.55;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.av{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:.76rem;font-weight:700;text-transform:uppercase;background:var(--copper-2);color:var(--ink)}
+.logout{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:8px;padding:10px;border-radius:10px;font-size:.8rem;font-weight:600;color:#ff9b9d;background:rgba(214,64,69,.12);border:1px solid rgba(214,64,69,.3);transition:background .2s}
+.logout:hover{background:rgba(214,64,69,.24)}
+.overlay{position:fixed;inset:0;z-index:40;background:rgba(10,12,18,.62);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .25s}
+.overlay.show{opacity:1;visibility:visible}
+/* topbar */
+.main{flex:1;min-width:0;margin-left:var(--sw)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;display:flex;align-items:center;gap:14px;padding:calc(12px + env(safe-area-inset-top,0px)) 28px 12px;min-height:66px;background:rgba(246,242,236,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top h1{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--fh);font-size:1.5rem;font-weight:700}
+.burger{display:none;width:38px;height:38px;border-radius:10px;background:#fff;border:1px solid var(--line)}
+.search{position:relative;flex:0 1 290px;min-width:0;margin-left:10px}
+.search i{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.8rem;opacity:.5}
+.search input{width:100%;padding:9px 14px 9px 36px;border-radius:40px;border:1.5px solid var(--line);background:#fff;font:inherit;font-size:.86rem;color:var(--text)}
+.search input:focus{outline:none;border-color:var(--copper-d);box-shadow:0 0 0 4px rgba(217,115,63,.2)}
+.top-r{margin-left:auto;display:flex;align-items:center;gap:10px}
+.call{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:40px;font-size:.84rem;font-weight:600;color:#fff;background:var(--ink);transition:background .2s,transform .2s}
+.call:hover{background:var(--copper-d);transform:translateY(-1px)}
+.ib{position:relative;width:38px;height:38px;border-radius:10px;background:#fff;border:1px solid var(--line);transition:border-color .2s}
+.ib:hover{border-color:var(--copper-d)}
+.ib em{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--copper);border:2px solid #fff}
+.user{position:relative}
+.user-btn{display:flex;align-items:center;gap:8px;padding:3px 12px 3px 3px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.84rem;font-weight:500}
+.user-btn .av{width:30px;height:30px;background:var(--ink);color:var(--copper-2)}
+.user-btn>i{font-size:.65rem;opacity:.5}
+.uname{max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-transform:capitalize}
+.menu{position:absolute;right:0;top:calc(100% + 8px);width:230px;padding:8px;border-radius:14px;background:#fff;border:1px solid var(--line);box-shadow:0 24px 44px -14px rgba(18,21,28,.4);opacity:0;visibility:hidden;transform:translateY(-6px);transition:.2s var(--ease)}
+.user.open .menu{opacity:1;visibility:visible;transform:none}
+.menu-mail{padding:8px 10px 10px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.menu-mail small{display:block;font-size:.7rem;color:var(--muted)}.menu-mail b{font-size:.82rem;word-break:break-all}
+.menu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border-radius:8px;font-size:.86rem;text-align:left}
+.menu button:hover{background:rgba(217,115,63,.12)}.menu .danger{color:var(--bad)}
+/* content */
+.content{padding:26px 28px 56px;max-width:1400px;margin:0 auto}
+.rise{opacity:0;transform:translateY(14px);animation:rise .55s var(--ease) forwards;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes rise{to{opacity:1;transform:none}}
+.hero{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:34px 36px;min-height:190px;margin-bottom:20px;border-radius:22px;color:var(--stone);background:linear-gradient(155deg,var(--ink),#0c0f15)}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(rgba(246,242,236,.06) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,rgba(246,242,236,.06) 1px,transparent 1px) 0 0/44px 44px;-webkit-mask-image:radial-gradient(circle at 70% 30%,#000,transparent 75%);mask-image:radial-gradient(circle at 70% 30%,#000,transparent 75%)}
+.hero::after{content:"";position:absolute;width:420px;height:420px;right:-120px;top:-170px;z-index:-1;border-radius:50%;background:radial-gradient(circle,rgba(217,115,63,.4),transparent 65%);animation:drift 12s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(-40px,30px) scale(1.12)}}
+.hero>div{position:relative;z-index:2}
+.eyebrow{font-size:.78rem;font-weight:600;color:var(--copper-2);margin-bottom:6px}
+.hero h2{font-family:var(--fh);font-size:2.2rem;font-weight:700;line-height:1.15;margin-bottom:8px;text-transform:capitalize}
+.hero p{max-width:500px;opacity:.8;line-height:1.7;font-weight:300}
+.sky{position:absolute;right:16px;bottom:0;z-index:1;display:flex;align-items:flex-end;gap:6px;height:100%;opacity:.4;pointer-events:none;-webkit-mask-image:linear-gradient(0deg,#000 30%,transparent);mask-image:linear-gradient(0deg,#000 30%,transparent)}
+.sky i{position:relative;width:28px;height:var(--h);border-radius:3px 3px 0 0;background:linear-gradient(180deg,#34405e,#161b26);transform-origin:bottom;transform:scaleY(0);animation:grow 1.1s var(--ease) var(--d) forwards}
+.sky i::before{content:"";position:absolute;inset:8px 4px 0;opacity:.1;background:radial-gradient(circle,var(--copper-2) 1.4px,transparent 2px) 0 0/8px 11px;animation:twinkle 4s ease-in-out var(--d) infinite alternate}
+@keyframes twinkle{50%{opacity:.8}}@keyframes grow{to{transform:none}}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border-radius:40px;font-size:.88rem;font-weight:700;border:1.5px solid var(--copper-d);background:var(--copper-d);color:#fff;transition:transform .2s,box-shadow .25s,background .2s}
+.btn::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg)}
+.btn:hover{transform:translateY(-2px);background:#a94a22;box-shadow:0 14px 26px -12px rgba(196,89,43,.8)}.btn:hover::before{animation:shine .8s}
+@keyframes shine{to{left:130%}}
+.btn.light{background:var(--stone);border-color:var(--stone);color:var(--ink)}.btn.light:hover{background:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}.btn.ghost:hover{background:rgba(217,115,63,.08);border-color:var(--copper-d);box-shadow:none}
+.btn.sm{padding:7px 14px;font-size:.8rem}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:20px}
+.stat{padding:18px;border-radius:16px;background:#fff;border:1px solid var(--line);cursor:pointer;transition:transform .25s,box-shadow .25s,border-color .25s}
+.stat:hover{transform:translateY(-4px);border-color:var(--copper-d);box-shadow:0 18px 32px -20px rgba(196,89,43,.6)}
+.stat-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.stat-top i{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:rgba(217,115,63,.14);color:var(--copper-d)}
+.stat-top span{font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;background:rgba(46,139,87,.13);color:#1f7343}
+.stat b{display:block;font-family:var(--fh);font-size:2.1rem;line-height:1.1}
+.stat small{display:block;margin-top:4px;font-size:.8rem;color:var(--muted)}
+.bar{height:5px;margin-top:12px;border-radius:99px;background:rgba(18,21,28,.08);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--ink-3),var(--copper));transition:width 1.1s var(--ease) .3s}
+.grid2{display:grid;grid-template-columns:1.7fr 1fr;gap:16px;margin-bottom:16px;align-items:start}
+.grid2>*{min-width:0}
+.card{padding:22px;margin-bottom:16px;border-radius:16px;background:#fff;border:1px solid var(--line);min-width:0}
+.grid2 .card{margin-bottom:0}
+.card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.card-h h3{font-family:var(--fh);font-size:1.2rem;font-weight:700;line-height:1.2}
+.card-h p{font-size:.82rem;color:var(--muted);margin-top:2px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{text-align:left;padding:0 10px 10px;font-size:.74rem;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line)}
+td{padding:13px 10px;border-bottom:1px solid var(--line);font-size:.88rem;vertical-align:middle}
+tr:last-child td{border-bottom:0}tbody tr:hover{background:rgba(217,115,63,.07)}
+.t1{font-weight:600}.t2{font-size:.76rem;color:var(--muted);margin-top:2px}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.74rem;font-weight:600;white-space:nowrap}
+.s-ok{background:rgba(46,139,87,.14);color:#1f7343}.s-warn{background:rgba(217,154,16,.2);color:#7f5a06}.s-bad{background:rgba(214,64,69,.12);color:#b02a2f}.s-info{background:rgba(61,111,180,.14);color:#2b5590}
+.list li{display:flex;gap:12px;align-items:center;padding:12px 6px;border-radius:10px;transition:background .15s}
+.list li:hover{background:rgba(217,115,63,.07)}
+.ico{flex:0 0 auto;width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:rgba(217,115,63,.14);color:var(--copper-d)}
+.list li>div{flex:1;min-width:0}.list b{font-size:.9rem}.list small{display:block;font-size:.76rem;color:var(--muted)}
+.when{flex:0 0 auto;width:56px;text-align:center;padding:6px 0;border-radius:10px;background:var(--ink);color:#fff}
+.when span{display:block;font-size:.66rem;color:var(--copper-2)}.when b{font-size:.9rem}
+.chart{display:flex;align-items:flex-end;gap:12px;height:190px;padding-top:10px}
+.chart div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:8px;font-size:.74rem;color:var(--muted)}
+.chart i{display:block;width:100%;max-width:46px;height:0;border-radius:10px 10px 4px 4px;background:linear-gradient(180deg,#3a4666,var(--ink));transition:height 1s var(--ease) .3s}
+.chart div.last i{background:linear-gradient(180deg,var(--copper-2),var(--copper-d))}
+/* properties */
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pc{overflow:hidden;border-radius:16px;background:#fff;border:1px solid var(--line);transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.pc:hover{transform:translateY(-6px);border-color:var(--copper-d);box-shadow:0 26px 40px -24px rgba(18,21,28,.55)}
+.ph{position:relative;height:132px;display:grid;place-items:center;overflow:hidden;color:rgba(255,255,255,.85);font-size:2.6rem}
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%) -120% 0/60% 100% no-repeat;transition:background-position .7s}
+.pc:hover .ph::after{background-position:220% 0}
+.ph>i.b{transition:transform .5s var(--ease)}.pc:hover .ph>i.b{transform:scale(1.18) translateY(-4px)}
+.pt{position:absolute;top:10px;left:10px;padding:4px 11px;border-radius:20px;background:var(--copper-d);color:#fff;font-size:.68rem;font-weight:700}
+.heart{position:absolute;top:8px;right:8px;z-index:2;width:34px;height:34px;border-radius:50%;background:rgba(18,21,28,.45);color:#fff;font-size:.85rem;transition:transform .2s,background .2s}
+.heart:hover{transform:scale(1.12)}.heart.on{background:#fff;color:var(--bad)}
+.pb{padding:14px 16px 16px}.pb h4{font-family:var(--fh);font-size:1.05rem;line-height:1.25}.pb p{font-size:.78rem;color:var(--muted);margin:3px 0 10px}
+.specs{display:flex;flex-wrap:wrap;gap:6px}.specs span{font-size:.68rem;padding:3px 9px;border-radius:20px;background:var(--sand)}
+.pp{display:flex;align-items:center;gap:6px;margin-top:12px}.pp b{font-family:var(--fh);font-size:1.15rem}.pp small{font-size:.7rem;color:var(--muted);flex:1}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:7px 15px;border-radius:999px;font-size:.82rem;font-weight:600;background:#fff;border:1px solid var(--line);transition:.2s}
+.chip:hover{border-color:var(--copper-d)}.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.steps{display:flex;gap:4px;min-width:150px}.steps i{flex:1;height:5px;border-radius:4px;background:var(--line)}.steps i.on{background:linear-gradient(90deg,var(--ink-3),var(--copper))}
+.cards{display:grid;gap:14px}
+.item{padding:18px;border-radius:14px;border:1px solid var(--line);background:#fff;transition:border-color .2s,transform .2s}
+.item:hover{border-color:var(--copper-d);transform:translateY(-2px)}
+.item-top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.item-top>div:first-child{flex:1 1 220px;min-width:0}.item h4{font-size:.98rem;margin-bottom:3px}.item p{font-size:.82rem;color:var(--muted)}
+.acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.setrow{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.setrow:last-child{border-bottom:0}.setrow b{display:block;font-size:.94rem}.setrow small{color:var(--muted);font-size:.82rem}
+.sw{position:relative;width:44px;height:24px;border-radius:99px;background:rgba(18,21,28,.2);transition:background .3s;flex:0 0 auto}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3);transition:transform .3s var(--ease)}
+.sw.on{background:var(--copper-d)}.sw.on::after{transform:translateX(20px)}
+.profile{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:16px}
+.profile .av{width:64px;height:64px;font-size:1.3rem;background:var(--ink);color:var(--copper-2)}
+.profile h4{font-family:var(--fh);font-size:1.4rem;text-transform:capitalize}
+.empty{padding:34px 10px;text-align:center;color:var(--muted)}.empty i{display:block;font-size:1.8rem;margin-bottom:8px;opacity:.5}
+.toast{position:fixed;left:50%;bottom:26px;z-index:100;max-width:calc(100vw - 32px);text-align:center;transform:translate(-50%,20px);padding:12px 20px;border-radius:40px;background:var(--ink);color:var(--stone);font-size:.86rem;box-shadow:0 16px 32px -10px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:.3s var(--ease)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1200px){.grid2{grid-template-columns:1fr}.pgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:1024px){.side{transform:translateX(-100%);transition:transform .35s var(--ease)}.side.open{transform:none}.main{margin-left:0}.x,.burger{display:grid;place-items:center}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){
+.content{padding:18px 16px 44px}.top{padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px}
+.search,.call span,.uname{display:none}.call{padding:10px 12px}.user-btn{padding:3px}
+.pgrid{grid-template-columns:1fr}.hero{padding:26px 20px;text-align:center;justify-content:center}.hero h2{font-size:1.7rem}.sky{display:none}
+.hero>div{display:flex;flex-direction:column;align-items:center}.top h1{font-size:1.2rem}
+.tw{overflow:visible}table{min-width:0}table,thead,tbody,tr,td{display:block;width:100%}thead{display:none}
+tbody tr{padding:12px 6px;border-bottom:1px solid var(--line)}tbody tr:last-child{border-bottom:0}
+td{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:5px 8px;border:0}
+td[data-label]::before{content:attr(data-label);font-size:.74rem;color:var(--muted)}td:first-child{display:block}
+.setrow{flex-wrap:wrap}.chips{justify-content:center}
+}
+@media(max-width:480px){.stats{grid-template-columns:1fr}.card{padding:16px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rise,.sky i{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="overlay" id="overlay"></div>
+<aside class="side" id="side">
+  <div class="side-head">
+    <a href="../index.html" class="brand" aria-label="Stackly home"><img src="../assets/stackly_logo.webp" alt="Stackly logo"></a>
+    <button class="x" id="closeSide" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="pill"><i class="live"></i><div><b>Client portal</b><small>340+ verified properties live</small></div></div>
+  <p class="grp">Workspace</p><nav class="nav" id="navMain"></nav>
+  <p class="grp">Account</p><nav class="nav" id="navAcc"></nav>
+  <button class="side-cta" data-nav="properties"><i class="fa-solid fa-magnifying-glass-location"></i> Find a property</button>
+  <div class="side-user"><span class="av" id="sAv">?</span><div><b id="sName">Client</b><small id="sMail">&mdash;</small></div></div>
+  <button class="logout" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log out</button>
+</aside>
+<main class="main">
+  <header class="top">
+    <button class="burger" id="burger" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    <h1 id="pageTitle">Overview</h1>
+    <label class="search"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="q" placeholder="Search properties, locations" aria-label="Search"></label>
+    <div class="top-r">
+      <button class="call" data-nav="visits"><i class="fa-solid fa-calendar-check"></i><span>Book a visit</span></button>
+      <button class="ib" id="bell" aria-label="Notifications"><i class="fa-solid fa-bell"></i><em></em></button>
+      <div class="user" id="user">
+        <button class="user-btn" id="userBtn" aria-label="Account menu"><span class="av" id="tAv">?</span><span class="uname" id="tName">Client</span><i class="fa-solid fa-chevron-down"></i></button>
+        <div class="menu"><div class="menu-mail"><small>Signed in as</small><b id="tMail">&mdash;</b></div>
+          <button data-nav="settings"><i class="fa-solid fa-gear"></i> Settings</button>
+          <button class="danger" id="menuLogout"><i class="fa-solid fa-right-from-bracket"></i> Log out</button></div>
+      </div>
+    </div>
+  </header>
+  <div class="content" id="content"></div>
+</main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+// STACKLY COMMERCIAL REALTY — user-dashboard.js (client portal)
+// Reads the session saved by login.html. NOTE: this check is client-side only; enforce access on your server too.
+(function () {
+  'use strict';
+  var user = null;
+  try { if (localStorage.getItem('isAuthenticated') === 'true') user = JSON.parse(localStorage.getItem('user') || 'null'); } catch (e) {}
+  if (!user || !user.email) { location.replace('./login.html'); return; }
+  if (user.role === 'admin') { location.replace('./admin-dashboard.html'); return; }
+
+  var email = user.email, uname = email.split('@')[0].replace(/[._-]+/g, ' '), initial = uname.charAt(0).toUpperCase();
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function safe(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function logout() { try { ['user', 'isAuthenticated', 'stacklyClientNav'].forEach(function (k) { localStorage.removeItem(k); }); } catch (e) {} location.href = './login.html'; }
+  var toastT;
+  function toast(m) { var t = $('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('show'); }, 2400); }
+  function hello() { var h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
+  function num(n) { return n.toLocaleString('en-IN'); }
+
+  /* ---------- Sample data (replace with your API) ---------- */
+  var ICON = { office: 'fa-building', retail: 'fa-shop', warehouse: 'fa-warehouse', cowork: 'fa-people-roof' };
+  var TYPES = { office: 'Office', retail: 'Retail', warehouse: 'Warehouse', cowork: 'Co-working' };
+  var props = [
+    { id: 1, n: 'Skyline Business Tower', loc: 'BKC, Mumbai', t: 'office', sf: 42000, p: 185, g: 'Grade A', s: 1, c: ['#283046', '#d9733f'] },
+    { id: 2, n: 'Gateway Logistics Park', loc: 'Bhiwandi, Mumbai', t: 'warehouse', sf: 120000, p: 32, g: 'Grade A', s: 1, c: ['#1f3a36', '#6fa97a'] },
+    { id: 3, n: 'Orchid Retail Plaza', loc: 'Baner, Pune', t: 'retail', sf: 8500, p: 240, g: 'High street', s: 0, c: ['#4a2c2a', '#e08a5b'] },
+    { id: 4, n: 'Nexus Tech Campus', loc: 'Hitec City, Hyderabad', t: 'office', sf: 68000, p: 92, g: 'LEED Gold', s: 1, c: ['#1e2a48', '#3d6fb4'] },
+    { id: 5, n: 'Harbour Co-work Hub', loc: 'Lower Parel, Mumbai', t: 'cowork', sf: 15000, p: 210, g: 'Plug & play', s: 0, c: ['#33283f', '#b57bd0'] },
+    { id: 6, n: 'Meridian Mall Unit 14', loc: 'Whitefield, Bengaluru', t: 'retail', sf: 6200, p: 265, g: 'Anchor-adjacent', s: 0, c: ['#3b2f1e', '#d9a441'] }
+  ];
+  var STAGES = ['Enquiry', 'Site visit', 'Negotiation', 'Documents', 'Signed'];
+  var enq = [
+    { id: 1, pid: 1, stage: 2, upd: '2 hrs ago' },
+    { id: 2, pid: 4, stage: 1, upd: 'Yesterday' },
+    { id: 3, pid: 2, stage: 0, upd: '3 days ago' }
+  ];
+  var visits = [
+    { id: 1, pid: 1, d: 'Today', day: '29', mo: 'OCT', tm: '4:30 PM', who: 'Neha Kapoor, Senior Broker', ok: 1 },
+    { id: 2, pid: 4, d: 'Tomorrow', day: '30', mo: 'OCT', tm: '11:00 AM', who: 'Arjun Rao, Leasing Manager', ok: 0 },
+    { id: 3, pid: 2, d: 'Mon', day: '02', mo: 'NOV', tm: '2:00 PM', who: 'Neha Kapoor, Senior Broker', ok: 1 }
+  ];
+  var docs = [
+    { n: 'Lease agreement, Skyline Tower (draft v3)', i: 'fa-file-signature', st: 'Needs review', k: 'warn', sz: '1.2 MB' },
+    { n: 'Heads of terms, Nexus Tech Campus', i: 'fa-file-contract', st: 'Signed', k: 'ok', sz: '640 KB' },
+    { n: 'Floor plans, Gateway Logistics Park', i: 'fa-ruler-combined', st: 'Shared', k: 'info', sz: '4.8 MB' },
+    { n: 'Company KYC pack', i: 'fa-id-card', st: 'Verified', k: 'ok', sz: '2.1 MB' }
+  ];
+  var feed = [
+    { i: 'fa-handshake', t: '<b>Neha</b> sent a revised rent offer for Skyline Business Tower', w: '2 hrs ago' },
+    { i: 'fa-calendar-check', t: 'Site visit confirmed for Skyline Business Tower, today 4:30 PM', w: '3 hrs ago' },
+    { i: 'fa-file-signature', t: 'Lease draft v3 is ready for your review', w: 'Yesterday' },
+    { i: 'fa-house-circle-check', t: 'Nexus Tech Campus matches your saved search', w: '2 days ago' }
+  ];
+  var rent = [['May', 168], ['Jun', 172], ['Jul', 175], ['Aug', 181], ['Sep', 184], ['Oct', 189]];
+  var settings = { visits: true, offers: true, digest: false };
+  var filter = '', typeFilter = 'all';
+  function prop(id) { return props.filter(function (p) { return p.id === id; })[0]; }
+
+  var pages = {
+    overview: { t: 'Overview', i: 'fa-gauge-high', g: 'main' }, properties: { t: 'Properties', i: 'fa-building', g: 'main' },
+    visits: { t: 'Site visits', i: 'fa-calendar-check', g: 'main' }, enquiries: { t: 'Enquiries', i: 'fa-comments-dollar', g: 'main' },
+    documents: { t: 'Leases & documents', i: 'fa-folder-open', g: 'main' }, settings: { t: 'Settings', i: 'fa-gear', g: 'acc' }
+  };
+
+  /* ---------- Fragments ---------- */
+  function bar(p) { return '<div class="bar"><i data-w="' + p + '"></i></div>'; }
+  function stat(i, icon, v, label, note, p, go) { return '<div class="stat rise" style="--i:' + i + '" data-nav="' + go + '"><div class="stat-top"><i class="fa-solid ' + icon + '"></i><span>' + note + '</span></div><b data-count="' + v + '">0</b><small>' + label + '</small>' + bar(p) + '</div>'; }
+  function pcard(p, i) {
+    return '<article class="pc rise" style="--i:' + i + '"><div class="ph" style="background:linear-gradient(135deg,' + p.c[0] + ',' + p.c[1] + ')"><i class="fa-solid ' + ICON[p.t] + ' b"></i><span class="pt">For lease</span><button class="heart' + (p.s ? ' on' : '') + '" data-save="' + p.id + '" aria-label="' + (p.s ? 'Remove from shortlist' : 'Save to shortlist') + '"><i class="fa-solid fa-heart"></i></button></div>' +
+      '<div class="pb"><h4>' + esc(p.n) + '</h4><p><i class="fa-solid fa-location-dot"></i> ' + esc(p.loc) + '</p><div class="specs"><span>' + num(p.sf) + ' sq ft</span><span>' + p.g + '</span><span>' + TYPES[p.t] + '</span></div>' +
+      '<div class="pp"><b>&#8377;' + p.p + '</b><small>per sq ft / month</small><button class="btn sm" data-enq="' + p.id + '">Enquire</button></div></div></article>';
+  }
+  function match(p) { return (typeFilter === 'all' || p.t === typeFilter) && (!filter || (p.n + ' ' + p.loc + ' ' + TYPES[p.t]).toLowerCase().indexOf(filter) > -1); }
+  function visitRow(v) {
+    var p = prop(v.pid);
+    return '<li><div class="when"><span>' + v.mo + '</span><b>' + v.day + '</b></div><div><b>' + esc(p.n) + '</b><small>' + v.tm + ' &middot; ' + esc(v.who) + '</small></div><span class="tag s-' + (v.ok ? 'ok' : 'warn') + '">' + (v.ok ? 'Confirmed' : 'Awaiting') + '</span></li>';
+  }
+
+  /* ---------- Pages ---------- */
+  function pOverview() {
+    var saved = props.filter(function (p) { return p.s; }), openE = enq.filter(function (e) { return e.stage < 4; }).length;
+    var chart = rent.map(function (r, i) { return '<div class="' + (i === rent.length - 1 ? 'last' : '') + '"><i data-h="' + (r[1] - 120) * 2.2 + '"></i>' + r[0] + '</div>'; }).join('');
+    return '<div class="hero rise"><div><div class="eyebrow">' + hello() + '</div><h2>Welcome back, ' + esc(uname) + '</h2><p>You have ' + visits.length + ' site visits lined up and ' + openE + ' enquiries in progress. Your next visit is at ' + visits[0].tm + ' today.</p>' +
+      '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="btn" data-nav="properties"><i class="fa-solid fa-magnifying-glass-location"></i> Browse properties</button><button class="btn light" data-nav="visits">View schedule</button></div></div>' +
+      '<div class="sky" aria-hidden="true"><i style="--h:45%;--d:.2s"></i><i style="--h:72%;--d:.3s"></i><i style="--h:56%;--d:.4s"></i><i style="--h:92%;--d:.15s"></i><i style="--h:64%;--d:.5s"></i><i style="--h:80%;--d:.35s"></i><i style="--h:50%;--d:.45s"></i></div></div>' +
+      '<section class="stats">' + stat(1, 'fa-heart', saved.length, 'Shortlisted properties', 'of ' + props.length + ' viewed', 60, 'properties') + stat(2, 'fa-comments-dollar', openE, 'Open enquiries', 'In negotiation: 1', 55, 'enquiries') +
+      stat(3, 'fa-calendar-check', visits.length, 'Upcoming site visits', 'Next: today', 70, 'visits') + stat(4, 'fa-file-signature', docs.length, 'Lease documents', '1 to review', 40, 'documents') + '</section>' +
+      '<section class="grid2"><div class="card rise" style="--i:5"><div class="card-h"><div><h3>Your shortlist</h3><p>Properties you saved to compare</p></div><button class="btn ghost sm" data-nav="properties">See all</button></div><div class="pgrid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">' + (saved.slice(0, 3).map(function (p, i) { return pcard(p, i); }).join('') || '<div class="empty">Save a property to start your shortlist.</div>') + '</div></div>' +
+      '<div class="card rise" style="--i:6"><div class="card-h"><div><h3>Upcoming visits</h3><p>Your next walkthroughs</p></div></div><ul class="list">' + visits.map(visitRow).join('') + '</ul></div></section>' +
+      '<section class="grid2"><div class="card rise" style="--i:7"><div class="card-h"><div><h3>Average asking rent</h3><p>Your shortlisted micro-markets, &#8377; per sq ft per month</p></div><span class="tag s-ok">+12.5% in 6 months</span></div><div class="chart">' + chart + '</div></div>' +
+      '<div class="card rise" style="--i:8"><div class="card-h"><div><h3>Recent activity</h3><p>On your enquiries</p></div></div><ul class="list">' + feed.map(function (f) { return '<li><span class="ico"><i class="fa-solid ' + f.i + '"></i></span><div><b style="font-weight:400;font-size:.86rem">' + f.t + '</b><small>' + f.w + '</small></div></li>'; }).join('') + '</ul></div></section>';
+  }
+  function pProperties() {
+    var list = props.filter(match);
+    var chips = [['all', 'All']].concat(Object.keys(TYPES).map(function (k) { return [k, TYPES[k]]; })).map(function (c) { return '<button class="chip' + (c[0] === typeFilter ? ' on' : '') + '" data-type="' + c[0] + '">' + c[1] + '</button>'; }).join('');
+    return '<div class="card-h rise"><div><h3 style="font-size:1.3rem">Available properties</h3><p>' + list.length + ' of ' + props.length + ' match &middot; tap the heart to shortlist</p></div></div><div class="chips">' + chips + '</div>' +
+      '<div class="pgrid">' + (list.map(pcard).join('') || '<div class="card empty" style="grid-column:1/-1"><i class="fa-regular fa-building"></i>No properties match. Try another type or search term.</div>') + '</div>';
+  }
+  function pVisits() {
+    return '<div class="card rise"><div class="card-h"><div><h3>Site visits</h3><p>Walkthroughs with your broker</p></div><button class="btn sm" data-nav="properties"><i class="fa-solid fa-plus"></i> Book a visit</button></div><div class="cards">' +
+      visits.map(function (v, i) { var p = prop(v.pid); return '<div class="item rise" style="--i:' + (i + 1) + '"><div class="item-top"><div><h4>' + esc(p.n) + ' <span class="tag s-' + (v.ok ? 'ok' : 'warn') + '">' + (v.ok ? 'Confirmed' : 'Awaiting') + '</span></h4><p>' + v.d + ', ' + v.tm + ' &middot; ' + esc(v.who) + ' &middot; ' + esc(p.loc) + '</p></div><div class="acts">' +
+        (v.ok ? '' : '<button class="btn sm" data-vconfirm="' + v.id + '">Confirm</button>') + '<button class="btn ghost sm" data-soon>Reschedule</button><button class="btn ghost sm" data-vcancel="' + v.id + '">Cancel</button></div></div></div>'; }).join('') +
+      (visits.length ? '' : '<div class="empty"><i class="fa-regular fa-calendar"></i>No visits booked. Pick a property to book one.</div>') + '</div></div>';
+  }
+  function pEnquiries() {
+    var rows = enq.map(function (e) {
+      var p = prop(e.pid);
+      return '<tr><td><div class="t1">' + esc(p.n) + '</div><div class="t2">' + esc(p.loc) + '</div></td><td data-label="Type">' + TYPES[p.t] + '</td><td data-label="Stage"><div><div class="steps">' + STAGES.map(function (s, i) { return '<i class="' + (i <= e.stage ? 'on' : '') + '"></i>'; }).join('') + '</div><div class="t2">' + STAGES[e.stage] + '</div></div></td><td data-label="Updated">' + e.upd + '</td><td data-label="Action"><button class="btn ghost sm" data-soon>Message broker</button></td></tr>';
+    }).join('');
+    return '<div class="card rise"><div class="card-h"><div><h3>Your enquiries</h3><p>From first contact to signed lease</p></div></div><div class="tw"><table><thead><tr><th>Property</th><th>Type</th><th>Stage</th><th>Updated</th><th>Action</th></tr></thead><tbody>' + (rows || '<tr><td><div class="empty">No enquiries yet.</div></td></tr>') + '</tbody></table></div></div>';
+  }
+  function pDocuments() {
+    return '<div class="card rise"><div class="card-h"><div><h3>Leases & documents</h3><p>Everything for your deals, in one place</p></div><button class="btn sm" data-soon><i class="fa-solid fa-upload"></i> Upload</button></div><ul class="list">' +
+      docs.map(function (d) { return '<li><span class="ico"><i class="fa-solid ' + d.i + '"></i></span><div><b>' + d.n + '</b><small>' + d.sz + '</small></div><span class="tag s-' + d.k + '">' + d.st + '</span><button class="btn ghost sm" data-soon aria-label="Download"><i class="fa-solid fa-download"></i></button></li>'; }).join('') + '</ul></div>';
+  }
+  function toggle(k, t, s) { return '<div class="setrow"><div><b>' + t + '</b><small>' + s + '</small></div><button class="sw' + (settings[k] ? ' on' : '') + '" data-toggle="' + k + '" role="switch" aria-checked="' + settings[k] + '" aria-label="' + t + '"></button></div>'; }
+  function pSettings() {
+    return '<div class="card rise"><div class="card-h"><div><h3>Profile</h3><p>Your account details</p></div></div><div class="profile"><span class="av">' + esc(initial) + '</span><div><h4>' + esc(uname) + '</h4><small style="color:var(--muted)">' + esc(email) + ' &middot; Client</small></div></div><button class="btn ghost sm" data-soon>Edit profile</button></div>' +
+      '<div class="card rise" style="--i:1"><div class="card-h"><div><h3>Notifications</h3><p>Choose what reaches you</p></div></div>' + toggle('visits', 'Site visit reminders', 'A reminder one hour before each visit') + toggle('offers', 'Offer and rent updates', 'When a landlord replies to your enquiry') + toggle('digest', 'Weekly market digest', 'New listings that match your shortlist') + '</div>' +
+      '<div class="card rise" style="--i:2"><div class="card-h"><div><h3>Session</h3><p>Signed in as ' + esc(email) + '</p></div></div><div class="acts"><button class="btn ghost sm" data-soon>Change password</button><button class="btn sm" id="setLogout" style="background:var(--bad);border-color:var(--bad)"><i class="fa-solid fa-right-from-bracket"></i> Log out</button></div></div>';
+  }
+  var R = { overview: pOverview, properties: pProperties, visits: pVisits, enquiries: pEnquiries, documents: pDocuments, settings: pSettings };
+
+  /* ---------- Shell ---------- */
+  var active = safe('stacklyClientNav'); if (!pages[active]) active = 'overview';
+  function renderNav() {
+    ['main', 'acc'].forEach(function (g) {
+      $(g === 'main' ? 'navMain' : 'navAcc').innerHTML = Object.keys(pages).filter(function (k) { return pages[k].g === g; }).map(function (k) {
+        var n = k === 'enquiries' && enq.length ? '<span class="n">' + enq.length + '</span>' : '';
+        return '<button data-nav="' + k + '" class="' + (k === active ? 'on' : '') + '"><i class="fa-solid ' + pages[k].i + '"></i>' + pages[k].t + n + '</button>';
+      }).join('');
+    });
+  }
+  function countUp() {
+    [].forEach.call(document.querySelectorAll('[data-count]'), function (el) {
+      var end = +el.getAttribute('data-count'), t0 = null;
+      (function step(t) { if (!t0) t0 = t; var p = Math.min((t - t0) / 900, 1); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); })(performance.now());
+    });
+  }
+  function animate() {
+    requestAnimationFrame(function () {
+      [].forEach.call(document.querySelectorAll('.bar i[data-w]'), function (el) { el.style.width = el.getAttribute('data-w') + '%'; });
+      [].forEach.call(document.querySelectorAll('.chart i[data-h]'), function (el) { el.style.height = el.getAttribute('data-h') + 'px'; });
+    });
+  }
+  function render(keep) {
+    $('pageTitle').textContent = pages[active].t; $('content').innerHTML = R[active](); renderNav(); animate(); countUp();
+    if (!keep) scrollTo(0, 0);
+    var sl = $('setLogout'); if (sl) sl.addEventListener('click', logout);
+  }
+  function go(id) { active = id; try { localStorage.setItem('stacklyClientNav', id); } catch (e) {} closeSide(); $('user').classList.remove('open'); render(); }
+  function openSide() { $('side').classList.add('open'); $('overlay').classList.add('show'); }
+  function closeSide() { $('side').classList.remove('open'); $('overlay').classList.remove('show'); }
+
+  ['sName', 'tName'].forEach(function (id) { $(id).textContent = uname; });
+  ['sMail', 'tMail'].forEach(function (id) { $(id).textContent = email; });
+  ['sAv', 'tAv'].forEach(function (id) { $(id).textContent = initial; });
+
+  /* ---------- Events ---------- */
+  $('burger').addEventListener('click', openSide); $('closeSide').addEventListener('click', closeSide); $('overlay').addEventListener('click', closeSide);
+  $('logoutBtn').addEventListener('click', logout); $('menuLogout').addEventListener('click', logout);
+  $('bell').addEventListener('click', function () { toast('Neha sent a revised offer on Skyline Business Tower.'); });
+  $('userBtn').addEventListener('click', function (e) { e.stopPropagation(); $('user').classList.toggle('open'); });
+  $('q').addEventListener('input', function (e) { filter = e.target.value.trim().toLowerCase(); if (active !== 'properties') { active = 'properties'; typeFilter = 'all'; } render(true); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeSide(); $('user').classList.remove('open'); } });
+  var side = $('side');
+  side.addEventListener('mousemove', function (e) { var r = side.getBoundingClientRect(); side.style.setProperty('--mx', (e.clientX - r.left) + 'px'); side.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
+
+  document.addEventListener('click', function (e) {
+    $('user').classList.remove('open'); var t = e.target, x;
+    if ((x = t.closest('[data-save]'))) { var p = prop(+x.getAttribute('data-save')); p.s = p.s ? 0 : 1; toast(p.s ? 'Saved to your shortlist.' : 'Removed from your shortlist.'); render(true); return; }
+    if ((x = t.closest('[data-enq]'))) {
+      var id = +x.getAttribute('data-enq'), pr = prop(id);
+      if (enq.some(function (q) { return q.pid === id; })) { toast('You already have an enquiry for ' + pr.n + '.'); return; }
+      enq.unshift({ id: Date.now(), pid: id, stage: 0, upd: 'Just now' }); toast('Enquiry sent for ' + pr.n + '. A broker will reply shortly.'); render(true); return;
+    }
+    if ((x = t.closest('[data-type]'))) { typeFilter = x.getAttribute('data-type'); render(true); return; }
+    if ((x = t.closest('[data-vconfirm]'))) { visits.filter(function (v) { return v.id === +x.getAttribute('data-vconfirm'); })[0].ok = 1; toast('Visit confirmed.'); render(true); return; }
+    if ((x = t.closest('[data-vcancel]'))) { var vid = +x.getAttribute('data-vcancel'); visits = visits.filter(function (v) { return v.id !== vid; }); toast('Visit cancelled.'); render(true); return; }
+    if ((x = t.closest('[data-toggle]'))) { var k = x.getAttribute('data-toggle'); settings[k] = !settings[k]; x.classList.toggle('on', settings[k]); x.setAttribute('aria-checked', settings[k]); toast('Preference saved.'); return; }
+    if ((x = t.closest('[data-nav]'))) { go(x.getAttribute('data-nav')); return; }
+    if (t.closest('[data-soon]')) toast('This feature is coming soon.');
+  });
+  render();
+})();
+</script>
+</body>
+</html>

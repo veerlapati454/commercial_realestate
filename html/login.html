@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#12151c">
+  <title>Login | Stackly Commercial Realty</title>
+  <meta name="description" content="Sign in to your Stackly Commercial Realty client portal to manage enquiries, site visits and leases.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* STACKLY COMMERCIAL REALTY — login.css (standalone: charcoal ink + copper on warm stone) */
+:root{
+  --ink:#12151c; --ink-2:#1a1f2b; --ink-3:#283046;
+  --copper:#d9733f; --copper-2:#ee9a6b; --copper-d:#c4592b; --accent-d:#b04e22;
+  --stone:#f6f2ec; --sand:#ebe4da;
+  --text:#1b1e27; --muted:#5d6470; --line:rgba(18,21,28,.13);
+  --white-80:rgba(246,242,236,.8); --white-60:rgba(246,242,236,.6); --white-15:rgba(246,242,236,.15); --white-08:rgba(246,242,236,.07);
+  --bad:#d64045; --ok:#2e8b57;
+  --font-h:'Playfair Display',Georgia,serif; --font-b:'DM Sans',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;max-width:100%;overflow-x:hidden}
+@supports(overflow:clip){html,body{overflow-x:clip}}
+body{font-family:var(--font-b);color:var(--text);background:var(--stone);-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit}
+button{font:inherit;color:inherit}
+img{max-width:100%;display:block}
+.ic{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.lg{display:grid;grid-template-columns:1.05fr .95fr;min-height:100vh;min-height:100dvh}
+
+/* animations stay paused until the intro curtain has lifted (set by login.js) */
+body:not(.ready) .lg *,body:not(.ready) .lg *::before,body:not(.ready) .lg *::after{animation-play-state:paused!important}
+
+/* ============ CURTAIN (page enter / leave) ============ */
+.curtain{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;background:var(--ink);transform:translateY(100%);transition:transform .85s cubic-bezier(.76,0,.24,1);pointer-events:none}
+.curtain.show,.curtain.cover{transform:none}
+.curtain.cover{pointer-events:auto}
+.curtain.show{transition:none;animation:cfail .01s 4s forwards}
+@keyframes cfail{to{transform:translateY(100%);visibility:hidden}}
+.curtain img{height:64px;width:auto}
+.c-bar{position:relative;display:block;width:170px;height:2px;border-radius:2px;background:var(--white-15);overflow:hidden}
+.c-bar::after{content:"";position:absolute;inset:0;background:var(--copper);transform:translateX(-100%);animation:cbar 1.1s ease-in-out infinite}
+@keyframes cbar{to{transform:translateX(100%)}}
+
+/* ============ BRAND PANEL ============ */
+.lg-brand{position:relative;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;gap:26px;padding:34px clamp(28px,4.5vw,64px) 38px;color:var(--stone);background:linear-gradient(155deg,var(--ink) 0%,#0c0f15 100%)}
+.lg-logo,.lg-body,.lg-stats{position:relative;z-index:3}
+.grid-bg{position:absolute;inset:0;z-index:0;opacity:.7;background:linear-gradient(var(--white-08) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,var(--white-08) 1px,transparent 1px) 0 0/48px 48px;-webkit-mask-image:radial-gradient(circle at 65% 35%,#000,transparent 72%);mask-image:radial-gradient(circle at 65% 35%,#000,transparent 72%)}
+.spot{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(440px circle at var(--mx,72%) var(--my,28%),rgba(217,115,63,.2),transparent 62%)}
+.orb{position:absolute;z-index:0;border-radius:50%;filter:blur(80px);pointer-events:none}
+.o1{width:420px;height:420px;background:rgba(217,115,63,.22);top:-150px;right:-130px;animation:drift 12s ease-in-out infinite alternate}
+.o2{width:340px;height:340px;background:rgba(61,111,180,.16);bottom:-120px;left:-100px;animation:drift 15s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate(50px,40px) scale(1.12)}}
+.lg-logo{align-self:flex-start}
+.lg-logo img{height:50px;width:auto}
+
+.lg-body{max-width:560px}
+.tag{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;font-size:.78rem;font-weight:500;color:var(--stone);border:1px solid var(--white-60);background:var(--white-08);margin-bottom:22px}
+.live{display:inline-block;flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--copper-2);box-shadow:0 0 0 0 rgba(238,154,107,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(238,154,107,0)}100%{box-shadow:0 0 0 0 rgba(238,154,107,0)}}
+.lg-brand h1{font-family:var(--font-h);font-weight:700;font-size:clamp(2.1rem,3.5vw,3.2rem);line-height:1.12;margin-bottom:18px}
+.ln{display:block;overflow:hidden;padding-bottom:.12em}
+.ln>span{display:block;transform:translateY(110%);animation:up .9s var(--ease) .15s forwards}
+.ln:nth-child(2)>span{animation-delay:.3s;color:var(--copper-2)}
+@keyframes up{to{transform:none}}
+.lg-body>p{font-weight:300;line-height:1.75;color:var(--white-80);max-width:480px;opacity:0;animation:fade .8s .55s forwards}
+@keyframes fade{to{opacity:1}}
+
+/* ---- animated property dashboard ---- */
+.mock{position:relative;max-width:490px;height:318px;margin-top:28px;transition:transform .3s ease-out}
+.card-m{position:absolute;background:rgba(246,242,236,.97);color:var(--text);border-radius:16px;box-shadow:0 24px 50px -16px rgba(0,0,0,.6);opacity:0;animation:pop .8s var(--ease) forwards}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+.prop{left:0;top:0;width:272px;overflow:hidden;animation-delay:.75s}
+.prop-img{position:relative;height:122px;overflow:hidden;background:linear-gradient(135deg,var(--ink-3),var(--ink-2))}
+.prop-img img{width:100%;height:100%;object-fit:cover;background:none;animation:kb 14s ease-in-out infinite alternate}
+@keyframes kb{to{transform:scale(1.13) translate(-2%,-2%)}}
+.prop-tag{position:absolute;top:10px;left:10px;padding:4px 11px;border-radius:20px;background:var(--copper-d);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.prop-body{padding:12px 15px 14px}
+.prop-body h4{font-family:var(--font-h);font-size:1rem;line-height:1.2}
+.prop-body p{font-size:.72rem;color:var(--muted);margin:3px 0 10px}
+.prop-specs{display:flex;flex-wrap:wrap;gap:6px}
+.prop-specs span{font-size:.64rem;padding:3px 9px;border-radius:20px;background:var(--sand)}
+.prop-price{display:flex;justify-content:space-between;align-items:baseline;margin-top:11px;font-family:var(--font-h);font-weight:700;font-size:1.05rem;color:var(--ink)}
+.prop-price small{font-family:var(--font-b);font-weight:400;font-size:.66rem;color:var(--muted)}
+
+.occ{right:0;top:18px;width:178px;padding:14px;animation:pop .8s var(--ease) 1s forwards,float 5s ease-in-out 2s infinite alternate}
+.occ-h{font-size:.68rem;font-weight:600;color:var(--muted)}
+.occ-v{font-family:var(--font-h);font-size:1.8rem;font-weight:700;line-height:1.15;margin:2px 0 12px}
+.occ-v small{font-family:var(--font-b);font-size:.74rem;font-weight:600;color:var(--ok);margin-left:6px}
+.bars{display:flex;align-items:flex-end;gap:6px;height:76px}
+.bars i{flex:1;height:var(--h);border-radius:4px 4px 0 0;background:linear-gradient(180deg,var(--copper),var(--copper-d));transform-origin:bottom;transform:scaleY(0);animation:grow .9s var(--ease) var(--d) forwards,breathe 4s ease-in-out calc(var(--d) + 1.2s) infinite alternate}
+.bars i:nth-child(odd){background:linear-gradient(180deg,#3a4666,var(--ink-3))}
+@keyframes grow{to{transform:scaleY(1)}}
+@keyframes breathe{to{transform:scaleY(.8)}}
+@keyframes float{to{transform:translateY(-12px)}}
+
+.chip{position:absolute;display:flex;align-items:center;gap:9px;padding:10px 16px;border-radius:40px;font-size:.74rem;font-weight:600;background:var(--stone);color:var(--ink);box-shadow:0 14px 30px -10px rgba(0,0,0,.55);opacity:0;animation:pop .7s var(--ease) forwards,float 4.5s ease-in-out infinite alternate}
+.chip .ic{color:var(--ok);width:15px;height:15px}
+.feed{left:4px;bottom:2px;width:300px;animation-delay:1.25s,2.1s}
+.feed-t{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed-t.swap{animation:swap .5s var(--ease)}
+@keyframes swap{from{opacity:0;transform:translateY(9px)}}
+.yield{right:2px;bottom:60px;animation-delay:1.45s,2.5s}
+
+.pin{position:absolute;z-index:3;display:flex;flex-direction:column;align-items:center;pointer-events:none;opacity:0;color:var(--c)}
+.pin svg{width:24px;height:24px;filter:drop-shadow(0 5px 6px rgba(0,0,0,.45))}
+.pin b{margin-top:1px;padding:3px 10px;border-radius:12px;font-size:.62rem;font-weight:600;color:#fff;background:var(--c);white-space:nowrap}
+.p1{left:118px;top:30px;animation:fade .5s 1.7s forwards,wander1 7s 2.2s ease-in-out infinite alternate}
+.p2{left:206px;top:20px;animation:fade .5s 1.9s forwards,wander2 8s 2.2s ease-in-out infinite alternate}
+@keyframes wander1{to{transform:translate(-44px,26px)}}
+@keyframes wander2{to{transform:translate(24px,34px)}}
+
+.lg-stats{display:flex;gap:clamp(22px,3.2vw,46px);padding-top:22px;border-top:1px solid var(--white-15)}
+.lg-stats b{display:block;font-family:var(--font-h);font-size:1.8rem;line-height:1.15;color:var(--copper-2)}
+.lg-stats span{font-size:.8rem;color:var(--white-60)}
+
+/* ---- skyline with twinkling windows ---- */
+.skyline{position:absolute;left:0;right:0;bottom:0;z-index:1;height:160px;display:flex;align-items:flex-end;gap:6px;padding:0 10px;opacity:.42;pointer-events:none;-webkit-mask-image:linear-gradient(0deg,#000 25%,transparent 100%);mask-image:linear-gradient(0deg,#000 25%,transparent 100%)}
+.skyline i{position:relative;flex:1;height:var(--h);border-radius:3px 3px 0 0;background:linear-gradient(180deg,#2b3550,#161b26);transform-origin:bottom;transform:scaleY(0);animation:rise 1.2s var(--ease) var(--d) forwards}
+.skyline i::before,.skyline i::after{content:"";position:absolute;inset:8px 5px 0;opacity:.08;background:radial-gradient(circle,var(--copper-2) 1.4px,transparent 2px) 0 0/9px 12px;animation:twinkle 4.5s ease-in-out var(--d) infinite alternate}
+.skyline i::after{background-position:4px 6px;animation-delay:calc(var(--d) + 1.7s);animation-direction:alternate-reverse}
+@keyframes rise{to{transform:none}}
+@keyframes twinkle{50%{opacity:.75}}
+
+/* ============ FORM SIDE ============ */
+.lg-form-wrap{position:relative;overflow:hidden;display:grid;place-items:center;padding:24px 28px;background-color:var(--stone);background-image:radial-gradient(rgba(18,21,28,.1) 1px,transparent 1px);background-size:26px 26px}
+.lg-form-wrap::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-160px;top:-140px;background:radial-gradient(circle,rgba(217,115,63,.2),transparent 68%);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
+.lg-card{position:relative;width:100%;max-width:470px;padding:30px 34px 22px;background:#fff;border-radius:22px;border:1px solid var(--line);box-shadow:0 30px 70px -28px rgba(18,21,28,.45);overflow:hidden;animation:card .8s var(--ease) .1s both}
+.lg-card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--ink),var(--copper),var(--ink));background-size:200% 100%;animation:bar 5s linear infinite}
+@keyframes bar{to{background-position:200% 0}}
+@keyframes card{from{opacity:0;transform:translateY(28px) scale(.98)}}
+.lg-card>*{animation:rise2 .6s var(--ease) both}
+.lg-card>:nth-child(1){animation-delay:.3s}.lg-card>:nth-child(2){animation-delay:.36s}.lg-card>:nth-child(3){animation-delay:.42s}.lg-card>:nth-child(4){animation-delay:.48s}
+.lg-card>:nth-child(5){animation-delay:.54s}.lg-card>:nth-child(6){animation-delay:.6s}.lg-card>:nth-child(7){animation-delay:.66s}.lg-card>:nth-child(8){animation-delay:.72s}
+@keyframes rise2{from{opacity:0;transform:translateY(14px)}}
+.lg-card.leaving{animation:leave .6s var(--ease) forwards}
+@keyframes leave{to{opacity:0;transform:translateY(-22px) scale(.97)}}
+
+.back{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;text-decoration:none;color:var(--muted);margin-bottom:14px;transition:color .2s,gap .2s}
+.back:hover{color:var(--accent-d);gap:12px}
+.eyebrow{display:block;font-size:.74rem;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;color:var(--accent-d);margin-bottom:6px}
+.lg-card h2{font-family:var(--font-h);font-size:2.05rem;font-weight:700;line-height:1.15}
+.sub{color:var(--muted);font-size:.95rem;margin:6px 0 16px}
+
+.sso{display:flex;gap:12px;margin-bottom:14px}
+.sso-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;padding:12px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:.88rem;transition:transform .2s,border-color .2s,background .2s,box-shadow .2s}
+.sso-btn:hover{transform:translateY(-2px);border-color:var(--copper-d);background:rgba(217,115,63,.06);box-shadow:0 10px 20px -12px rgba(196,89,43,.5)}
+.sso-btn .g{font-family:var(--font-b);font-weight:700;font-size:1.05rem;color:#4285f4}
+.sso-btn .ic{width:16px;height:16px}
+.divider{display:flex;align-items:center;gap:12px;font-size:.78rem;color:var(--muted);margin-bottom:16px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+
+.role{border:0;margin-bottom:14px}
+.role legend{font-size:.82rem;font-weight:600;margin-bottom:8px}
+.seg{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:40px;background:rgba(18,21,28,.06);border:1px solid var(--line)}
+.seg label{position:relative;z-index:1;cursor:pointer}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;font-weight:600;font-size:.9rem;border-radius:40px;transition:color .25s}
+.seg input:checked+span{color:#fff}
+.seg input:focus-visible+span{outline:2px solid var(--copper-d);outline-offset:2px}
+.thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:40px;background:var(--ink);box-shadow:0 8px 16px -6px rgba(18,21,28,.6);transition:transform .4s var(--ease),background .3s}
+.seg[data-role="admin"] .thumb{transform:translateX(100%);background:var(--copper-d)}
+
+.field{position:relative;margin-bottom:16px}
+.field input{width:100%;padding:24px 46px 9px 46px;border:1.5px solid var(--line);border-radius:14px;background:#fff;color:var(--text);font:inherit;font-size:.98rem;transition:border-color .2s,box-shadow .2s}
+.field input:focus{outline:none;border-color:var(--copper-d);box-shadow:0 0 0 4px rgba(217,115,63,.2)}
+.field input:-webkit-autofill{-webkit-box-shadow:0 0 0 60px #fff inset;-webkit-text-fill-color:var(--text)}
+.field label{position:absolute;left:46px;top:17px;font-size:.98rem;color:var(--muted);pointer-events:none;transition:top .2s,font-size .2s,color .2s}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field input:-webkit-autofill+label{top:7px;font-size:.7rem;color:var(--accent-d)}
+.lead{position:absolute;left:16px;top:19px;width:18px;height:18px;color:var(--muted);transition:color .2s}
+.field:focus-within .lead{color:var(--copper-d)}
+.eye{position:absolute;right:6px;top:8px;width:38px;height:38px;display:grid;place-items:center;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:8px;transition:color .2s,background .2s}
+.eye:hover{color:var(--copper-d);background:rgba(217,115,63,.1)}
+.eye .ic{width:18px;height:18px}
+.eye .off{display:none}
+.eye.on-state .off{display:block}
+.eye.on-state .on{display:none}
+input[type="password"]::-ms-reveal,input[type="password"]::-ms-clear{display:none}
+.hint{display:block;margin-top:6px;font-size:.78rem;color:var(--muted)}
+.caps{display:flex;align-items:center;gap:6px;margin-top:6px;font-size:.78rem;color:#b9770e}
+.caps[hidden]{display:none}
+.caps .ic{width:14px;height:14px}
+.field.invalid input{border-color:var(--bad);background:#fff8f7}
+.field.invalid .hint{color:var(--bad);font-weight:500}
+.field.valid input{border-color:var(--ok)}
+.shake{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.strength{display:flex;gap:5px;margin-top:8px}
+.strength i{flex:1;height:4px;border-radius:4px;background:var(--line);transition:background .3s}
+.strength[data-s="1"] i:nth-child(-n+1){background:var(--bad)}
+.strength[data-s="2"] i:nth-child(-n+2){background:#f2b632}
+.strength[data-s="3"] i:nth-child(-n+3){background:#8cc063}
+.strength[data-s="4"] i{background:var(--ok)}
+
+.row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 18px;font-size:.9rem}
+.remember{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.remember input{width:16px;height:16px;accent-color:var(--copper-d)}
+.forgot{font-weight:600;color:var(--accent-d);text-decoration:none;background:linear-gradient(var(--accent-d),var(--accent-d)) 0 100%/0 2px no-repeat;transition:background-size .3s;padding-bottom:2px}
+.forgot:hover{background-size:100% 2px}
+
+.btn{position:relative;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border:0;border-radius:40px;overflow:hidden;cursor:pointer;background:var(--copper-d);color:#fff;font-family:var(--font-b);font-size:1rem;font-weight:700;letter-spacing:.3px;transition:transform .2s,box-shadow .25s,background .3s}
+.btn::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg)}
+.btn:hover{background:#a94a22;transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(196,89,43,.75)}
+.btn:hover::before{animation:shine .8s}
+.btn:active{transform:none}
+.btn:focus-visible{outline:3px solid var(--copper-2);outline-offset:3px}
+.btn .lbl{display:inline-flex;align-items:center;gap:10px;transition:gap .25s}
+.btn:hover .lbl{gap:16px}
+.btn .lbl .ic{width:18px;height:18px}
+@keyframes shine{to{left:130%}}
+.btn .spin{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+.btn.loading .lbl{display:none}
+.btn.loading .spin{display:inline-block}
+.btn.done{background:var(--ok)}
+.btn:disabled{cursor:progress}
+@keyframes sp{to{transform:rotate(360deg)}}
+.form-status{min-height:18px;margin-top:10px;font-size:.85rem;text-align:center;color:var(--muted)}
+.form-status.err{color:var(--bad);font-weight:500}
+.form-status.ok{color:var(--ok);font-weight:500}
+.signup{text-align:center;margin-top:6px;font-size:.92rem;color:var(--muted)}
+.signup a{font-weight:700;color:var(--accent-d);text-underline-offset:3px}
+.secure{display:flex;justify-content:center;gap:8px;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:.76rem;color:var(--muted)}
+.secure .ic{width:14px;height:14px;color:var(--ok)}
+
+/* ============ RESPONSIVE ============ */
+@media(min-width:981px) and (max-height:940px){
+  .lg-body>p{display:none}
+  .mock{margin-top:22px}
+}
+@media(min-width:981px) and (max-height:800px){
+  .lg-brand{padding-top:26px;padding-bottom:28px;gap:18px}
+  .lg-logo img{height:42px}
+  .lg-brand h1{font-size:clamp(1.9rem,3vw,2.6rem);margin-bottom:8px}
+  .tag{margin-bottom:16px}
+  .mock{zoom:.8;margin-top:12px}
+  .lg-stats{padding-top:16px}
+  .lg-stats b{font-size:1.5rem}
+  .lg-card{padding:22px 32px 16px}
+  .lg-card h2{font-size:1.8rem;margin-bottom:12px}
+  .sub{display:none}
+  .role legend{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .role{margin-bottom:10px}
+  .back{margin-bottom:8px}
+  .field input{padding-top:22px;padding-bottom:7px}
+  .field{margin-bottom:12px}
+  .strength{margin-top:6px}
+}
+@media(max-width:980px){
+  .lg{grid-template-columns:1fr}
+  .lg-brand{padding:26px 22px 34px;gap:16px;align-items:center;text-align:center}
+  .lg-logo{align-self:center}
+  .lg-body{display:flex;flex-direction:column;align-items:center}
+  .lg-body>p,.mock,.lg-stats{display:none}
+  .lg-brand h1{font-size:clamp(1.8rem,7.5vw,2.6rem);margin-bottom:0}
+  .tag{margin-bottom:14px;max-width:100%;text-align:center}
+  .skyline{height:90px}
+  .lg-form-wrap{padding:28px 16px 44px}
+}
+@media(max-width:600px){
+  .lg-card{padding:30px 20px 24px;text-align:center}
+  .back{justify-content:center;display:flex}
+  .role legend,.hint,.caps{text-align:center;justify-content:center}
+  .row{justify-content:center}
+  .sso{flex-direction:column}
+  .field label{max-width:calc(100% - 100px)}
+}
+@media(max-width:380px){.lg-card h2{font-size:1.7rem}.tag{font-size:.72rem}}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .curtain{display:none}
+  .ln>span,.skyline i,.bars i{transform:none}
+  .lg-body>p,.card-m,.chip,.pin,.lg-card>*{opacity:1}
+}
+  </style>
+  <noscript><style>.curtain{display:none!important}.lg *{animation-play-state:running!important}</style></noscript>
+</head>
+<body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill-rule="evenodd" stroke="none" fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/></symbol>
+    <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+  </defs>
+</svg>
+
+<!-- page-load / page-leave curtain -->
+<div class="curtain show" id="curtain" aria-hidden="true">
+  <img src="../assets/stackly_logo.webp" alt="">
+  <span class="c-bar"></span>
+</div>
+
+<main class="lg">
+
+  <!-- LEFT: brand + animated property dashboard -->
+  <aside class="lg-brand" id="brandPanel">
+    <span class="grid-bg" aria-hidden="true"></span>
+    <span class="spot" aria-hidden="true"></span>
+    <span class="orb o1" aria-hidden="true"></span>
+    <span class="orb o2" aria-hidden="true"></span>
+
+    <a href="../index.html" class="lg-logo" aria-label="Stackly Commercial Realty home"><img src="../assets/stackly_logo.webp" alt="Stackly logo"></a>
+
+    <div class="lg-body">
+      <span class="tag"><i class="live"></i> 340+ verified properties live this week</span>
+      <h1><span class="ln"><span>Your next property move,</span></span><span class="ln"><span>managed in one place.</span></span></h1>
+      <p>Sign in to track enquiries, schedule site visits, compare shortlisted properties and keep every lease document organised.</p>
+
+      <div class="mock" id="mock" aria-hidden="true">
+        <div class="card-m prop">
+          <div class="prop-img">
+            <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=700&q=70" alt="">
+            <span class="prop-tag">For Lease</span>
+          </div>
+          <div class="prop-body">
+            <h4>Skyline Business Tower</h4>
+            <p>Financial District, Mumbai</p>
+            <div class="prop-specs"><span>42,000 sq ft</span><span>Grade A</span><span>LEED Gold</span></div>
+            <div class="prop-price"><span>&#8377;185</span><small>per sq ft / month</small></div>
+          </div>
+        </div>
+
+        <div class="card-m occ">
+          <div class="occ-h"><span>Portfolio occupancy</span></div>
+          <div class="occ-v"><span id="occVal" data-count="92" data-suffix="%">92%</span><small>&uarr; 6%</small></div>
+          <div class="bars"><i style="--h:42%;--d:1.2s"></i><i style="--h:58%;--d:1.3s"></i><i style="--h:50%;--d:1.4s"></i><i style="--h:72%;--d:1.5s"></i><i style="--h:66%;--d:1.6s"></i><i style="--h:88%;--d:1.7s"></i></div>
+        </div>
+
+        <div class="chip feed"><i class="live"></i><span class="feed-t" id="feedText">New enquiry &middot; Skyline Business Tower</span></div>
+        <div class="chip yield"><svg class="ic"><use href="#i-trend"/></svg> Yield 8.4%</div>
+
+        <div class="pin p1" style="--c:#d9733f"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg><b>BKC</b></div>
+        <div class="pin p2" style="--c:#3d6fb4"><svg viewBox="0 0 24 24"><use href="#i-pin"/></svg><b>Baner</b></div>
+      </div>
+    </div>
+
+    <div class="lg-stats">
+      <div><b data-count="1200" data-suffix="+">1,200+</b><span>Deals closed</span></div>
+      <div><b data-count="24" data-suffix="M">24M</b><span>Sq ft transacted</span></div>
+      <div><b data-count="98" data-suffix="%">98%</b><span>Client retention</span></div>
+    </div>
+
+    <div class="skyline" aria-hidden="true">
+      <i style="--h:60px;--d:.15s"></i><i style="--h:104px;--d:.25s"></i><i style="--h:78px;--d:.35s"></i><i style="--h:140px;--d:.2s"></i><i style="--h:92px;--d:.4s"></i><i style="--h:120px;--d:.3s"></i><i style="--h:70px;--d:.45s"></i><i style="--h:150px;--d:.1s"></i><i style="--h:96px;--d:.5s"></i><i style="--h:64px;--d:.38s"></i><i style="--h:126px;--d:.28s"></i><i style="--h:84px;--d:.48s"></i><i style="--h:110px;--d:.18s"></i><i style="--h:68px;--d:.42s"></i>
+    </div>
+  </aside>
+
+  <!-- RIGHT: form -->
+  <section class="lg-form-wrap">
+    <div class="lg-card" id="lgCard">
+      <a href="../index.html" class="back"><svg class="ic"><use href="#i-arrow-left"/></svg> Back to Home</a>
+
+      <span class="eyebrow">Secure client portal</span>
+      <h2>Welcome back</h2>
+      <p class="sub">Sign in to manage your enquiries, site visits and leases.</p>
+
+      <div class="sso">
+        <button type="button" class="sso-btn" data-sso="Google"><span class="g" aria-hidden="true">G</span> Google</button>
+        <button type="button" class="sso-btn" data-sso="Company SSO"><svg class="ic"><use href="#i-key"/></svg> Company SSO</button>
+      </div>
+      <div class="divider">or sign in with email</div>
+
+      <form id="loginForm" novalidate>
+
+        <fieldset class="role">
+          <legend>Login as</legend>
+          <div class="seg" id="seg" data-role="user">
+            <label><input type="radio" name="role" value="user" checked><span><svg class="ic"><use href="#i-user"/></svg> Client</span></label>
+            <label><input type="radio" name="role" value="admin"><span><svg class="ic"><use href="#i-shield"/></svg> Admin</span></label>
+            <i class="thumb" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <svg class="ic lead"><use href="#i-mail"/></svg>
+          <input type="email" id="email" name="email" placeholder=" " autocomplete="email" maxlength="254" required>
+          <label for="email">Work email</label>
+          <small class="hint" data-for="email">Use the email you registered with.</small>
+        </div>
+
+        <div class="field">
+          <svg class="ic lead"><use href="#i-lock"/></svg>
+          <input type="password" id="password" name="password" placeholder=" " autocomplete="current-password" maxlength="64" required>
+          <label for="password">Password</label>
+          <button type="button" class="eye" aria-label="Show password" aria-pressed="false">
+            <svg class="ic on"><use href="#i-eye"/></svg><svg class="ic off"><use href="#i-eye-off"/></svg>
+          </button>
+          <div class="strength" id="strength" data-s="0" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <small class="hint" data-for="password">Minimum 8 characters, no spaces.</small>
+          <small class="caps" id="capsWarn" hidden><svg class="ic"><use href="#i-alert"/></svg> Caps Lock is on</small>
+        </div>
+
+        <div class="row">
+          <label class="remember"><input type="checkbox" id="rememberMe" name="rememberMe"><span>Keep me signed in</span></label>
+          <a href="mailto:hello@stackly.ai?subject=Password%20help" class="forgot">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn" id="loginBtn">
+          <span class="lbl">Sign in <svg class="ic"><use href="#i-arrow-right"/></svg></span>
+          <span class="spin" aria-hidden="true"></span>
+        </button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+
+        <p class="signup">New to Stackly? <a href="./contact.html">Request an account</a></p>
+      </form>
+
+      <p class="secure"><svg class="ic"><use href="#i-shield"/></svg> Encrypted in transit and at rest</p>
+    </div>
+  </section>
+
+</main>
+<script>
+// STACKLY COMMERCIAL REALTY — login.js
+// Intro curtain, validation (email + password rules + strength meter), show/hide password,
+// caps-lock warning, loading/success states, role-based redirect, and the animated property dashboard.
+(function () {
+  'use strict';
+
+  /* ----- settings you can change ----- */
+  var LOGIN_ENDPOINT = '';                      // put your sign-in API URL here; empty = demo mode (no real check)
+  var REDIRECT = { user: './user-dashboard.html', admin: './admin-dashboard.html' };
+  var FALLBACK_HOME = '../index.html';          // used when a dashboard page does not exist yet
+
+  var body = document.body;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var curtain = document.getElementById('curtain');
+
+  /* ----- intro: lift the curtain, then let the page animations start ----- */
+  var isReady = false, readyCbs = [];
+  function setReady() {
+    if (isReady) return;
+    isReady = true; body.classList.add('ready');
+    readyCbs.forEach(function (f) { f(); });
+  }
+  function onReady(f) { if (isReady) f(); else readyCbs.push(f); }
+  function lift() {
+    if (curtain) curtain.classList.remove('show');
+    setTimeout(setReady, reduce ? 0 : 450);
+  }
+  if (reduce) { lift(); }
+  else {
+    if (document.readyState === 'complete') setTimeout(lift, 450);
+    else window.addEventListener('load', function () { setTimeout(lift, 450); });
+    setTimeout(lift, 2500);               // never keep the visitor waiting on slow images
+  }
+
+  /* ----- helpers ----- */
+  function countUp(el, delay) {
+    var end = parseFloat(el.dataset.count), suf = el.dataset.suffix || '', dec = parseInt(el.dataset.dec || '0', 10);
+    function fmt(v) { return (dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-IN')) + suf; }
+    if (reduce) { el.textContent = fmt(end); return; }
+    el.textContent = fmt(0);
+    var start = null, dur = 1600;
+    function step(t) {
+      if (!start) start = t;
+      var p = Math.min(1, (t - start) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(end * e);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    setTimeout(function () { requestAnimationFrame(step); }, delay);
+  }
+
+  /* ----- brand panel: counters, live feed, spotlight + parallax ----- */
+  onReady(function () {
+    [].forEach.call(document.querySelectorAll('[data-count]'), function (el, i) { countUp(el, 700 + i * 160); });
+  });
+
+  var feed = document.getElementById('feedText');
+  if (feed && !reduce) {
+    var items = ['New enquiry · Skyline Business Tower', 'Site visit confirmed · Today 4:30 PM', 'Lease signed · 42,000 sq ft', 'Rent review report is ready', 'Offer received · Gateway Logistics Park'];
+    var fi = 0;
+    setInterval(function () {
+      fi = (fi + 1) % items.length;
+      feed.textContent = items[fi];
+      feed.classList.remove('swap'); void feed.offsetWidth; feed.classList.add('swap');
+    }, 2600);
+  }
+
+  var panel = document.getElementById('brandPanel'), mock = document.getElementById('mock');
+  if (panel && canHover && !reduce) {
+    panel.addEventListener('mousemove', function (e) {
+      var r = panel.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      panel.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+      panel.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      if (mock) mock.style.transform = 'translate(' + ((x - 0.5) * -18).toFixed(1) + 'px,' + ((y - 0.5) * -14).toFixed(1) + 'px)';
+    });
+    panel.addEventListener('mouseleave', function () { if (mock) mock.style.transform = ''; });
+  }
+  [].forEach.call(document.querySelectorAll('.prop-img img'), function (img) {
+    function hide() { img.style.visibility = 'hidden'; }
+    img.addEventListener('error', hide);
+    if (img.complete && img.naturalWidth === 0) hide();     // already failed before this script ran
+  });
+
+  /* ----- form ----- */
+  var form = document.getElementById('loginForm');
+  if (!form) return;
+
+  var card = document.getElementById('lgCard');
+  var emailInput = document.getElementById('email');
+  var passwordInput = document.getElementById('password');
+  var btn = document.getElementById('loginBtn');
+  var caps = document.getElementById('capsWarn');
+  var seg = document.getElementById('seg');
+  var strength = document.getElementById('strength');
+  var statusEl = document.getElementById('formStatus');
+  var EMAIL = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
+
+  function setStatus(text, kind) { statusEl.textContent = text; statusEl.className = 'form-status' + (kind ? ' ' + kind : ''); }
+
+  /* prefill remembered email */
+  try {
+    var saved = localStorage.getItem('rememberedEmail');
+    if (saved) { emailInput.value = saved; document.getElementById('rememberMe').checked = true; }
+  } catch (e) {}
+
+  /* role toggle */
+  [].forEach.call(form.querySelectorAll('input[name="role"]'), function (r) {
+    r.addEventListener('change', function () { seg.setAttribute('data-role', r.value); });
+  });
+
+  /* show / hide password */
+  var eye = form.querySelector('.eye');
+  eye.addEventListener('click', function () {
+    var show = passwordInput.type === 'password';
+    passwordInput.type = show ? 'text' : 'password';
+    eye.classList.toggle('on-state', show);
+    eye.setAttribute('aria-pressed', show ? 'true' : 'false');
+    eye.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    passwordInput.focus();
+  });
+
+  /* caps lock */
+  function checkCaps(e) { if (e.getModifierState) caps.hidden = !e.getModifierState('CapsLock'); }
+  passwordInput.addEventListener('keyup', checkCaps);
+  passwordInput.addEventListener('keydown', checkCaps);
+  passwordInput.addEventListener('blur', function () { caps.hidden = true; });
+
+  /* strength meter (visual only) */
+  passwordInput.addEventListener('input', function () {
+    var v = passwordInput.value, s = 0;
+    if (v.length >= 8) s++;
+    if (v.length >= 12) s++;
+    if (/[A-Z]/.test(v) && /[a-z]/.test(v)) s++;
+    if (/\d/.test(v) && /[^A-Za-z0-9]/.test(v)) s++;
+    strength.setAttribute('data-s', v ? Math.max(1, s) : 0);
+  });
+
+  /* validation */
+  var hints = {};
+  [].forEach.call(form.querySelectorAll('.hint'), function (h) { hints[h.getAttribute('data-for')] = { el: h, text: h.textContent }; });
+  function setState(input, message) {
+    var wrap = input.closest('.field'), h = hints[input.id], ok = !message;
+    wrap.classList.toggle('invalid', !ok);
+    wrap.classList.toggle('valid', ok && input.value !== '');
+    input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    h.el.textContent = ok ? h.text : message;
+    return ok;
+  }
+  function checkEmail() {
+    var v = emailInput.value.trim();
+    if (!v) return setState(emailInput, 'Please enter your email address.');
+    if (v.length > 254 || /\.\./.test(v) || !EMAIL.test(v)) return setState(emailInput, 'Please enter a valid email, e.g. you@company.com.');
+    return setState(emailInput, '');
+  }
+  function checkPassword() {
+    var v = passwordInput.value;
+    if (!v) return setState(passwordInput, 'Please enter your password.');
+    if (v.length < 8) return setState(passwordInput, 'Password must be at least 8 characters.');
+    if (/\s/.test(v)) return setState(passwordInput, 'Password cannot contain spaces.');
+    return setState(passwordInput, '');
+  }
+  emailInput.addEventListener('blur', checkEmail);
+  passwordInput.addEventListener('blur', checkPassword);
+  emailInput.addEventListener('input', function () { if (emailInput.closest('.field').classList.contains('invalid')) checkEmail(); });
+  passwordInput.addEventListener('input', function () { if (passwordInput.closest('.field').classList.contains('invalid')) checkPassword(); });
+
+  function shake(input) {
+    var w = input.closest('.field');
+    w.classList.remove('shake'); void w.offsetWidth; w.classList.add('shake');
+  }
+
+  /* single sign-on buttons (not connected yet) */
+  [].forEach.call(document.querySelectorAll('.sso-btn'), function (b) {
+    b.addEventListener('click', function () {
+      setStatus(b.getAttribute('data-sso') + ' sign-in is not set up yet. Please use your email and password.', '');
+    });
+  });
+
+  /* leave: curtain rises, then go to the right dashboard (or home if that page does not exist yet) */
+  function go(role) {
+    var target = REDIRECT[role] || FALLBACK_HOME;
+    function jump(url) { window.location.href = url; }
+    card.classList.add('leaving');
+    if (curtain) curtain.classList.add('cover');
+    setTimeout(function () {
+      if (!window.fetch) return jump(target);
+      fetch(target, { method: 'HEAD' })
+        .then(function (r) { jump(r.ok ? target : FALLBACK_HOME); })
+        .catch(function () { jump(FALLBACK_HOME); });
+    }, reduce ? 100 : 900);
+  }
+
+  /* submit */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    setStatus('', '');
+    var okE = checkEmail(), okP = checkPassword();
+    if (!okE || !okP) {
+      var first = !okE ? emailInput : passwordInput;
+      shake(first); first.focus();
+      setStatus('Please correct the highlighted fields.', 'err');
+      return;
+    }
+    var role = form.querySelector('input[name="role"]:checked').value;
+    var email = emailInput.value.trim();
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    var request = LOGIN_ENDPOINT
+      ? fetch(LOGIN_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, password: passwordInput.value, role: role }) })
+          .then(function (r) { if (!r.ok) throw new Error('Invalid credentials'); return r; })
+      : new Promise(function (resolve) { setTimeout(resolve, 1100); });   // demo mode: replace by setting LOGIN_ENDPOINT
+
+    request.then(function () {
+      try {
+        localStorage.setItem('user', JSON.stringify({ email: email, role: role }));
+        localStorage.setItem('isAuthenticated', 'true');
+        if (document.getElementById('rememberMe').checked) localStorage.setItem('rememberedEmail', email);
+        else localStorage.removeItem('rememberedEmail');
+      } catch (err) {}
+      btn.classList.remove('loading');
+      btn.classList.add('done');
+      btn.innerHTML = '<span class="lbl"><svg class="ic"><use href="#i-check"/></svg> Signing you in...</span>';
+      setStatus('Welcome back! Taking you to your portal.', 'ok');
+      go(role);
+    }).catch(function () {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      shake(passwordInput);
+      setStatus('Email or password is incorrect. Please try again.', 'err');
+    });
+  });
+})();
+</script>
+</body>
+</html>
