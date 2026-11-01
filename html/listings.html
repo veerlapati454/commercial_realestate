@@ -14,6 +14,116 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css">
+
+<style>
+/* ============================================================
+   Listings: additional sections
+   Tip: point the --ls-* tokens at your own brand variables
+   if the navy / gold shades differ from your main stylesheet.
+   ============================================================ */
+.ls-markets, .ls-verify, .ls-compare, .ls-faq {
+  --ls-navy: #0f2340;
+  --ls-gold: #c9a24a;
+  --ls-muted: #5d6879;
+  --ls-line: rgba(15, 35, 64, .14);
+  --ls-surface: #ffffff;
+}
+
+/* 1. Markets */
+.ls-market-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+.ls-market {
+  display: flex; flex-direction: column;
+  background: var(--ls-surface);
+  border: 1px solid var(--ls-line);
+  border-left: 3px solid var(--ls-gold);
+  border-radius: 6px;
+  padding: 24px 26px 22px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.ls-market:hover, .ls-market:focus-visible { border-color: var(--ls-navy); box-shadow: 0 8px 24px rgba(15,35,64,.08); }
+.ls-market:focus-visible { outline: 2px solid var(--ls-gold); outline-offset: 2px; }
+.ls-market-type { font-size: .82rem; font-weight: 600; color: var(--ls-gold); margin-bottom: 6px; }
+.ls-market h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: var(--ls-navy); margin: 0 0 8px; }
+.ls-market p { margin: 0 0 16px; color: var(--ls-muted); font-size: .95rem; line-height: 1.6; flex: 1; }
+.ls-market-go { font-size: .9rem; font-weight: 600; color: var(--ls-navy); }
+
+/* 2. Verification */
+.ls-verify-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 40px; margin-top: 48px; }
+.ls-check { display: grid; grid-template-columns: 40px 1fr; gap: 6px 16px; }
+.ls-check-ico {
+  grid-row: span 2;
+  display: grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--ls-navy); color: var(--ls-gold);
+}
+.ls-check-ico svg { width: 20px; height: 20px; }
+.ls-check h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ls-navy); margin: 0; align-self: center; }
+.ls-check p { margin: 0; color: var(--ls-muted); font-size: .93rem; line-height: 1.6; }
+
+/* 3. Lease vs buy */
+.ls-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+.ls-panel {
+  background: var(--ls-surface);
+  border: 1px solid var(--ls-line);
+  border-radius: 6px;
+  padding: 32px 32px 34px;
+}
+.ls-panel.buy { background: var(--ls-navy); border-color: var(--ls-navy); color: #fff; }
+.ls-panel h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--ls-navy); margin: 0 0 6px; }
+.ls-panel.buy h3 { color: #fff; }
+.ls-panel .ls-for { margin: 0 0 20px; color: var(--ls-muted); font-size: .95rem; }
+.ls-panel.buy .ls-for { color: rgba(255,255,255,.75); }
+.ls-panel ul { list-style: none; margin: 0; padding: 0; }
+.ls-panel li {
+  position: relative;
+  padding: 12px 0 12px 28px;
+  border-top: 1px solid var(--ls-line);
+  font-size: .95rem; line-height: 1.55;
+}
+.ls-panel.buy li { border-top-color: rgba(255,255,255,.18); }
+.ls-panel li::before {
+  content: ""; position: absolute; left: 4px; top: 19px;
+  width: 7px; height: 12px;
+  border-right: 2px solid var(--ls-gold); border-bottom: 2px solid var(--ls-gold);
+  transform: rotate(40deg);
+}
+.ls-panel li b { color: var(--ls-navy); }
+.ls-panel.buy li b { color: var(--ls-gold); }
+
+/* 4. FAQ */
+.ls-faq-wrap { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+.ls-acc details { background: var(--ls-surface); border: 1px solid var(--ls-line); border-radius: 6px; margin-bottom: 12px; }
+.ls-acc summary {
+  list-style: none; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  padding: 18px 22px; font-weight: 600; color: var(--ls-navy);
+}
+.ls-acc summary::-webkit-details-marker { display: none; }
+.ls-acc summary::after {
+  content: "+"; flex: none; width: 26px; height: 26px;
+  display: grid; place-items: center; border-radius: 50%;
+  border: 1px solid var(--ls-gold); color: var(--ls-gold);
+  font-size: 1.1rem; line-height: 1;
+  transition: background .25s ease, color .25s ease;
+}
+.ls-acc details[open] summary::after { content: "\2212"; background: var(--ls-gold); color: var(--ls-navy); }
+.ls-acc summary:focus-visible { outline: 2px solid var(--ls-gold); outline-offset: 2px; border-radius: 6px; }
+.ls-acc details p { margin: 0; padding: 0 22px 20px; color: var(--ls-muted); line-height: 1.7; max-width: 62ch; }
+
+@media (max-width: 1024px) {
+  .ls-market-grid, .ls-verify-grid { grid-template-columns: repeat(2, 1fr); }
+  .ls-faq-wrap { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (max-width: 720px) {
+  .ls-market-grid, .ls-verify-grid, .ls-compare-grid { grid-template-columns: 1fr; }
+  .ls-panel { padding: 26px 22px 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ls-market, .ls-acc summary::after { transition: none; }
+}
+</style>
 </head>
 <body data-page="listings">
 
@@ -62,7 +172,7 @@
 <main>
 <section class="page-hero dark">
   <div class="hero-media" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1800&q=70" alt="" class="hero-img" fetchpriority="high">
+    <img src="../assets/q21.webp" alt="" class="hero-img" fetchpriority="high">
     <span class="hero-shade"></span>
   </div>
   <div class="wrap hero-inner">
@@ -90,41 +200,202 @@
     </div>
     <div class="listing-grid" id="listingGrid">
       <article class="listing" data-type="office">
-        <div class="l-img"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?auto=format&fit=crop&w=1000&q=70" alt="Glass-fronted Grade-A office tower"><span class="tag">For Lease</span></div>
+        <div class="l-img"><img loading="lazy" decoding="async" src="../assets/q22.webp" alt="Glass-fronted Grade-A office tower"><span class="tag">For Lease</span></div>
         <div class="l-body"><h3>Skyline Business Tower</h3><p class="loc">&#128205; Financial District, Mumbai</p>
           <ul class="specs"><li><b>42,000</b> sq ft</li><li><b>Grade A</b> </li><li><b>LEED</b> Gold</li></ul>
           <div class="l-foot"><span class="price">&#8377;185<small>/sq ft/mo</small></span><a href="#cta" class="link-arrow">Enquire</a></div></div>
       </article>
 <article class="listing" data-type="retail">
-        <div class="l-img"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=70" alt="Bright high-street retail store interior"><span class="tag">For Lease</span></div>
+        <div class="l-img"><img loading="lazy" decoding="async" src="../assets/q23.webp" alt="Bright high-street retail store interior"><span class="tag">For Lease</span></div>
         <div class="l-body"><h3>Heritage Row Flagship Store</h3><p class="loc">&#128205; Commercial Street, Bengaluru</p>
           <ul class="specs"><li><b>6,800</b> sq ft</li><li><b>Corner</b> unit</li><li><b>40 ft</b> frontage</li></ul>
           <div class="l-foot"><span class="price">&#8377;420<small>/sq ft/mo</small></span><a href="#cta" class="link-arrow">Enquire</a></div></div>
       </article>
 <article class="listing" data-type="industrial">
-        <div class="l-img"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=70" alt="Large logistics warehouse interior with racking"><span class="tag alt">For Sale</span></div>
+        <div class="l-img"><img loading="lazy" decoding="async" src="../assets/q24.webp" alt="Large logistics warehouse interior with racking"><span class="tag alt">For Sale</span></div>
         <div class="l-body"><h3>Gateway Logistics Park</h3><p class="loc">&#128205; Sriperumbudur, Chennai</p>
           <ul class="specs"><li><b>1.2L</b> sq ft</li><li><b>12 m</b> clear height</li><li><b>8.4%</b> yield</li></ul>
           <div class="l-foot"><span class="price">&#8377;96 Cr<small> ask</small></span><a href="#cta" class="link-arrow">Enquire</a></div></div>
       </article>
 <article class="listing" data-type="hospitality">
-        <div class="l-img"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=70" alt="Boutique hotel exterior with pool"><span class="tag alt">For Sale</span></div>
+        <div class="l-img"><img loading="lazy" decoding="async" src="../assets/q25.webp" alt="Boutique hotel exterior with pool"><span class="tag alt">For Sale</span></div>
         <div class="l-body"><h3>The Laurel Boutique Hotel</h3><p class="loc">&#128205; Candolim, Goa</p>
           <ul class="specs"><li><b>64</b> keys</li><li><b>4-star</b> operating</li><li><b>72%</b> occupancy</li></ul>
           <div class="l-foot"><span class="price">&#8377;148 Cr<small> ask</small></span><a href="#cta" class="link-arrow">Enquire</a></div></div>
       </article>
 <article class="listing" data-type="office">
-        <div class="l-img"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=70" alt="Modern co-working floor with shared desks"><span class="tag">For Lease</span></div>
+        <div class="l-img"><img loading="lazy" decoding="async" src="../assets/q26.webp" alt="Modern co-working floor with shared desks"><span class="tag">For Lease</span></div>
         <div class="l-body"><h3>Nexus Managed Offices</h3><p class="loc">&#128205; Baner, Pune</p>
           <ul class="specs"><li><b>18,500</b> sq ft</li><li><b>Fully</b> furnished</li><li><b>Move-in</b> ready</li></ul>
           <div class="l-foot"><span class="price">&#8377;95<small>/seat/day</small></span><a href="#cta" class="link-arrow">Enquire</a></div></div>
       </article>
 <article class="listing" data-type="retail">
-        <div class="l-img"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=70" alt="Mixed-use city block with shops at street level"><span class="tag alt">For Sale</span></div>
+        <div class="l-img"><img loading="lazy" decoding="async" src="../assets/q27.webp" alt="Mixed-use city block with shops at street level"><span class="tag alt">For Sale</span></div>
         <div class="l-body"><h3>Civic Plaza Mixed-Use Block</h3><p class="loc">&#128205; Golf Course Road, Gurugram</p>
           <ul class="specs"><li><b>58,000</b> sq ft</li><li><b>100%</b> let</li><li><b>7.2%</b> yield</li></ul>
           <div class="l-foot"><span class="price">&#8377;210 Cr<small> ask</small></span><a href="#cta" class="link-arrow">Enquire</a></div></div>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NEW SECTIONS ===================== -->
+
+<!-- 1. MARKETS -->
+<section class="sec sand ls-markets" id="markets">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow">Where we list</span>
+      <h2 class="split">Commercial markets across India</h2>
+      <p class="desc">Our current listings span six cities. Choose a market to see what is available there.</p>
+    </div>
+    <div class="ls-market-grid">
+      <a class="ls-market" href="#listings">
+        <span class="ls-market-type">Office &middot; For lease</span>
+        <h3>Mumbai</h3>
+        <p>Grade-A tower space in the Financial District with green-building credentials.</p>
+        <span class="ls-market-go">View in listings &rarr;</span>
+      </a>
+      <a class="ls-market" href="#listings">
+        <span class="ls-market-type">Retail &middot; For lease</span>
+        <h3>Bengaluru</h3>
+        <p>Corner high-street frontage on Commercial Street for flagship brands.</p>
+        <span class="ls-market-go">View in listings &rarr;</span>
+      </a>
+      <a class="ls-market" href="#listings">
+        <span class="ls-market-type">Industrial &middot; For sale</span>
+        <h3>Chennai</h3>
+        <p>Income-generating logistics park near the Sriperumbudur industrial belt.</p>
+        <span class="ls-market-go">View in listings &rarr;</span>
+      </a>
+      <a class="ls-market" href="#listings">
+        <span class="ls-market-type">Office &middot; For lease</span>
+        <h3>Pune</h3>
+        <p>Furnished, move-in-ready managed offices in Baner for growing teams.</p>
+        <span class="ls-market-go">View in listings &rarr;</span>
+      </a>
+      <a class="ls-market" href="#listings">
+        <span class="ls-market-type">Mixed-use &middot; For sale</span>
+        <h3>Gurugram</h3>
+        <p>A fully let mixed-use block on Golf Course Road for yield-focused investors.</p>
+        <span class="ls-market-go">View in listings &rarr;</span>
+      </a>
+      <a class="ls-market" href="#listings">
+        <span class="ls-market-type">Hospitality &middot; For sale</span>
+        <h3>Goa</h3>
+        <p>An operating four-star boutique hotel in Candolim with established occupancy.</p>
+        <span class="ls-market-go">View in listings &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. VERIFICATION -->
+<section class="sec light ls-verify" id="verified">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow">Our standard</span>
+      <h2 class="split">What &ldquo;verified&rdquo; means on Stackly</h2>
+      <p class="desc">Before a property appears here, our team confirms the six points below. Ask for the full information pack on any listing.</p>
+    </div>
+    <div class="ls-verify-grid">
+      <div class="ls-check">
+        <span class="ls-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="m9 15 2 2 4-4"/></svg></span>
+        <h3>Ownership and title</h3>
+        <p>The seller or landlord's right to lease or sell is confirmed against records.</p>
+      </div>
+      <div class="ls-check">
+        <span class="ls-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg></span>
+        <h3>Zoning and approvals</h3>
+        <p>Permitted use, FSI and building approvals are checked for the intended purpose.</p>
+      </div>
+      <div class="ls-check">
+        <span class="ls-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.2 8.2 8 9 4.8-.8 8-4.5 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <h3>Safety and compliance</h3>
+        <p>Fire, occupancy and utility certifications are reviewed and noted.</p>
+      </div>
+      <div class="ls-check">
+        <span class="ls-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M8 15h3"/></svg></span>
+        <h3>Lease and income records</h3>
+        <p>For let properties, tenancy terms and rental income are matched to documents.</p>
+      </div>
+      <div class="ls-check">
+        <span class="ls-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+        <h3>Site inspection</h3>
+        <p>An advisor visits the property so photos and specifications reflect reality.</p>
+      </div>
+      <div class="ls-check">
+        <span class="ls-check-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></span>
+        <h3>Price benchmarking</h3>
+        <p>Asking rents and prices are compared with similar properties in the micro-market.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. LEASE VS BUY -->
+<section class="sec sand ls-compare" id="compare">
+  <div class="wrap">
+    <div class="head center">
+      <span class="eyebrow">Lease or buy</span>
+      <h2 class="split">Which route suits your business?</h2>
+      <p class="desc">Both are available across our listings. Here is how they differ in practice.</p>
+    </div>
+    <div class="ls-compare-grid">
+      <div class="ls-panel">
+        <h3>Leasing</h3>
+        <p class="ls-for">Best for occupiers who want flexibility and lower upfront cost.</p>
+        <ul>
+          <li><b>Capital stays in the business.</b> You pay monthly rent instead of a purchase price.</li>
+          <li><b>Room to grow.</b> Lock-in periods and expansion options can be negotiated.</li>
+          <li><b>Faster move-in.</b> Managed and furnished spaces can be ready quickly.</li>
+          <li><b>Running costs vary.</b> Maintenance and escalations depend on the lease terms.</li>
+        </ul>
+      </div>
+      <div class="ls-panel buy">
+        <h3>Buying</h3>
+        <p class="ls-for">Best for investors and long-term owners building asset value.</p>
+        <ul>
+          <li><b>Asset ownership.</b> You hold the property and any appreciation in its value.</li>
+          <li><b>Rental income.</b> Let properties show their yield so you can compare returns.</li>
+          <li><b>Larger commitment.</b> Due diligence, funding and registration take more time.</li>
+          <li><b>Exit planning.</b> Tenant quality and location affect how easily you can resell.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. FAQ -->
+<section class="sec light ls-faq" id="faq">
+  <div class="wrap ls-faq-wrap">
+    <div class="head tight">
+      <span class="eyebrow">Questions</span>
+      <h2 class="split">Before you enquire</h2>
+      <p class="desc">Quick answers about our listings. For anything else, speak to an advisor.</p>
+      <a href="./contact.html" class="btn btn-navy magnetic">Contact an advisor</a>
+    </div>
+    <div class="ls-acc">
+      <details open>
+        <summary>Are the listed prices final?</summary>
+        <p>No. Prices are indicative and subject to negotiation. We confirm current terms with the owner when you enquire.</p>
+      </details>
+      <details>
+        <summary>What do I receive when I enquire?</summary>
+        <p>An advisor sends the full information pack for the property, including specifications, documents and commercial terms, and can arrange a visit.</p>
+      </details>
+      <details>
+        <summary>Can I see properties that are not listed here?</summary>
+        <p>Yes. We also work with off-market inventory. Share your requirements and we will include suitable options in your shortlist.</p>
+      </details>
+      <details>
+        <summary>How is the yield on sale listings calculated?</summary>
+        <p>Yield reflects annual rental income relative to the asking price. Ask for the rent roll in the information pack to see the working behind it.</p>
+      </details>
+      <details>
+        <summary>Do you help after I choose a property?</summary>
+        <p>Yes. We support negotiation, legal and documentation coordination, and handover through to completion.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -134,7 +405,7 @@
 <section class="cta-band" id="cta">
   <div class="wrap">
     <div class="cta-card">
-      <div class="cta-bg" aria-hidden="true"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1600&q=70" alt=""></div>
+      <div class="cta-bg" aria-hidden="true"><img loading="lazy" decoding="async" src="../assets/q28.webp" alt=""></div>
       <div class="cta-copy">
         <span class="eyebrow">Let's talk</span>
         <h2>Ready to find your next commercial property?</h2>

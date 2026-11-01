@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#12151c">
+<title>Sign Up | Stackly Commercial Realty</title>
+<meta name="description" content="Create your Stackly Commercial Realty client account to shortlist properties, book site visits and manage leases.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* STACKLY COMMERCIAL REALTY — signup (standalone, matches login: charcoal ink + copper on warm stone) */
+:root{--ink:#12151c;--ink-2:#1a1f2b;--ink-3:#283046;--copper:#d9733f;--copper-2:#ee9a6b;--copper-d:#c4592b;--accent-d:#b04e22;--stone:#f6f2ec;--sand:#ebe4da;--text:#1b1e27;--muted:#5d6470;--line:rgba(18,21,28,.13);--w80:rgba(246,242,236,.8);--w60:rgba(246,242,236,.6);--w15:rgba(246,242,236,.15);--w08:rgba(246,242,236,.07);--bad:#d64045;--ok:#2e8b57;--amber:#e0a526;--fh:'Playfair Display',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;max-width:100%;overflow-x:hidden}
+@supports(overflow:clip){html,body{overflow-x:clip}}
+body{font-family:var(--fb);color:var(--text);background:var(--stone);-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--copper-d);outline-offset:2px}
+.lg{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;min-height:100dvh;align-items:start}
+
+/* ===== brand panel (sticky) ===== */
+.lg-brand{position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;gap:22px;padding:34px clamp(28px,4.5vw,60px) 36px;color:var(--stone);background:linear-gradient(155deg,var(--ink),#0c0f15)}
+.lg-logo,.lg-body,.lg-stats{position:relative;z-index:3}
+.grid-bg{position:absolute;inset:0;z-index:0;opacity:.7;background:linear-gradient(var(--w08) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,var(--w08) 1px,transparent 1px) 0 0/48px 48px;-webkit-mask-image:radial-gradient(circle at 65% 35%,#000,transparent 72%);mask-image:radial-gradient(circle at 65% 35%,#000,transparent 72%)}
+.spot{position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(440px circle at var(--mx,72%) var(--my,28%),rgba(217,115,63,.2),transparent 62%)}
+.orb{position:absolute;z-index:0;border-radius:50%;filter:blur(80px);pointer-events:none}
+.o1{width:420px;height:420px;background:rgba(217,115,63,.22);top:-150px;right:-130px;animation:drift 12s ease-in-out infinite alternate}
+.o2{width:340px;height:340px;background:rgba(61,111,180,.16);bottom:-120px;left:-100px;animation:drift 15s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate(50px,40px) scale(1.12)}}
+.lg-logo{align-self:flex-start}.lg-logo img{height:48px;width:auto;display:block}
+.lg-body{max-width:540px}
+.tag{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;font-size:.78rem;font-weight:500;border:1px solid var(--w60);background:var(--w08);margin-bottom:20px}
+.live{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--copper-2);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(238,154,107,.7)}70%,100%{box-shadow:0 0 0 9px rgba(238,154,107,0)}}
+.lg-brand h1{font-family:var(--fh);font-weight:700;font-size:clamp(2rem,3.4vw,3.1rem);line-height:1.12;margin-bottom:16px}
+.ln{display:block;overflow:hidden;padding-bottom:.12em}
+.ln>span{display:block;transform:translateY(110%);animation:up .9s var(--ease) .1s forwards}
+.ln:nth-child(2)>span{animation-delay:.25s;color:var(--copper-2)}
+@keyframes up{to{transform:none}}
+.lead-p{font-weight:300;line-height:1.75;color:var(--w80);max-width:470px;opacity:0;animation:fade .8s .5s forwards}
+@keyframes fade{to{opacity:1}}
+
+/* journey card */
+.journey{margin-top:24px;max-width:450px;padding:20px 22px;border-radius:18px;background:rgba(246,242,236,.97);color:var(--text);box-shadow:0 26px 50px -18px rgba(0,0,0,.6);opacity:0;animation:pop .8s var(--ease) .7s forwards;transition:transform .3s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(24px) scale(.96)}to{opacity:1;transform:none}}
+.j-h{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.9rem;margin-bottom:12px}
+.j-h small{font-weight:600;color:var(--ok);font-size:.74rem}
+.j-bar{height:6px;border-radius:6px;background:var(--line);overflow:hidden;margin-bottom:16px}
+.j-bar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--ink-3),var(--copper));animation:fill 9s ease-in-out 1.2s infinite}
+@keyframes fill{0%{width:0}15%{width:25%}40%{width:60%}65%,90%{width:100%}100%{width:100%}}
+.tasks{list-style:none;display:grid;gap:12px}
+.tasks li{display:flex;align-items:center;gap:12px;font-size:.88rem;font-weight:500}
+.ck{width:26px;height:26px;flex:0 0 auto;border-radius:50%;display:grid;place-items:center;font-size:.68rem;color:#fff;background:var(--line);animation:tick 9s infinite}
+.ck i{opacity:0;animation:tickI 9s infinite}
+.tasks li:nth-child(1) .ck,.tasks li:nth-child(1) .ck i{animation-delay:1.2s}.tasks li:nth-child(2) .ck,.tasks li:nth-child(2) .ck i{animation-delay:2.6s}.tasks li:nth-child(3) .ck,.tasks li:nth-child(3) .ck i{animation-delay:4.2s}.tasks li:nth-child(4) .ck,.tasks li:nth-child(4) .ck i{animation-delay:5.6s}
+@keyframes tick{0%{background:var(--line);transform:scale(1)}8%{background:var(--ok);transform:scale(1.25)}14%,88%{background:var(--ok);transform:scale(1)}100%{background:var(--line)}}
+@keyframes tickI{0%{opacity:0}8%,88%{opacity:1}100%{opacity:0}}
+.team{display:flex;align-items:center;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted)}
+.stack{display:flex}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.62rem;font-weight:700;color:#fff;border:2px solid var(--stone);margin-left:-8px}
+.stack .av:first-child{margin-left:0}
+.a1{background:var(--copper)}.a2{background:#3d6fb4}.a3{background:#7a5aa6}.a4{background:var(--ink)}
+
+.lg-stats{display:flex;gap:clamp(22px,3vw,44px);padding-top:20px;border-top:1px solid var(--w15)}
+.lg-stats b{display:block;font-family:var(--fh);font-size:1.75rem;line-height:1.15;color:var(--copper-2)}
+.lg-stats span{font-size:.8rem;color:var(--w60)}
+.skyline{position:absolute;left:0;right:0;bottom:0;z-index:1;height:150px;display:flex;align-items:flex-end;gap:6px;padding:0 10px;opacity:.4;pointer-events:none;-webkit-mask-image:linear-gradient(0deg,#000 25%,transparent 100%);mask-image:linear-gradient(0deg,#000 25%,transparent 100%)}
+.skyline i{position:relative;flex:1;height:var(--h);border-radius:3px 3px 0 0;background:linear-gradient(180deg,#2b3550,#161b26);transform-origin:bottom;transform:scaleY(0)}
+.skyline i{animation:grow 1.2s var(--ease) var(--d) forwards}
+.skyline i::before{content:"";position:absolute;inset:8px 5px 0;opacity:.08;background:radial-gradient(circle,var(--copper-2) 1.4px,transparent 2px) 0 0/9px 12px;animation:twinkle 4.5s ease-in-out var(--d) infinite alternate}
+@keyframes grow{to{transform:none}}@keyframes twinkle{50%{opacity:.7}}
+
+/* ===== form side ===== */
+.lg-form-wrap{position:relative;overflow:hidden;display:flex;justify-content:center;padding:40px 28px 56px;min-height:100vh;background-color:var(--stone);background-image:radial-gradient(rgba(18,21,28,.1) 1px,transparent 1px);background-size:26px 26px}
+.lg-form-wrap::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;right:-160px;top:-140px;background:radial-gradient(circle,rgba(217,115,63,.2),transparent 68%);animation:drift 14s ease-in-out infinite alternate;pointer-events:none}
+.lg-card{position:relative;width:100%;max-width:580px;height:fit-content;align-self:center;padding:34px 36px 26px;background:#fff;border-radius:22px;border:1px solid var(--line);box-shadow:0 30px 70px -28px rgba(18,21,28,.45);overflow:hidden;animation:card .8s var(--ease) both}
+.lg-card::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--ink),var(--copper),var(--ink));background-size:200% 100%;animation:bar 5s linear infinite}
+@keyframes bar{to{background-position:200% 0}}@keyframes card{from{opacity:0;transform:translateY(26px) scale(.98)}}
+.back{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;text-decoration:none;color:var(--muted);margin-bottom:16px;transition:color .2s,gap .2s}
+.back:hover{color:var(--accent-d);gap:12px}
+.eyebrow{display:block;font-size:.76rem;font-weight:700;color:var(--accent-d);margin-bottom:6px}
+.lg-card h2{font-family:var(--fh);font-size:2.05rem;font-weight:700;line-height:1.15}
+.sub{color:var(--muted);font-size:.95rem;margin:6px 0 18px}
+.sso{display:flex;gap:12px;margin-bottom:14px}
+.sso button{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;padding:12px;border-radius:12px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-weight:600;font-size:.88rem;transition:transform .2s,border-color .2s,background .2s,box-shadow .2s}
+.sso button:hover{transform:translateY(-2px);border-color:var(--copper-d);background:rgba(217,115,63,.06);box-shadow:0 10px 20px -12px rgba(196,89,43,.5)}
+.divider{display:flex;align-items:center;gap:12px;font-size:.78rem;color:var(--muted);margin-bottom:16px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+#signupForm>*{opacity:0;transform:translateY(12px);animation:rise2 .6s var(--ease) forwards}
+#signupForm>:nth-child(1){animation-delay:.15s}#signupForm>:nth-child(2){animation-delay:.22s}#signupForm>:nth-child(3){animation-delay:.29s}#signupForm>:nth-child(4){animation-delay:.36s}#signupForm>:nth-child(5){animation-delay:.43s}#signupForm>:nth-child(6){animation-delay:.5s}#signupForm>:nth-child(7){animation-delay:.57s}#signupForm>:nth-child(8){animation-delay:.64s}
+@keyframes rise2{to{opacity:1;transform:none}}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+
+.field{position:relative;margin-bottom:16px}
+.field input{width:100%;padding:24px 44px 9px 44px;border:1.5px solid var(--line);border-radius:14px;background:#fff;color:var(--text);font:inherit;font-size:.96rem;transition:border-color .2s,box-shadow .2s}
+.field input:focus{outline:none;border-color:var(--copper-d);box-shadow:0 0 0 4px rgba(217,115,63,.2)}
+.field input:-webkit-autofill{-webkit-box-shadow:0 0 0 60px #fff inset;-webkit-text-fill-color:var(--text)}
+.field label{position:absolute;left:44px;top:17px;max-width:calc(100% - 90px);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:.96rem;color:var(--muted);pointer-events:none;transition:top .2s,font-size .2s,color .2s}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,.field input:-webkit-autofill+label{top:7px;font-size:.7rem;color:var(--accent-d)}
+.lead{position:absolute;left:15px;top:20px;font-size:.92rem;color:var(--muted);transition:color .2s}
+.field:focus-within .lead{color:var(--copper-d)}
+.eye{position:absolute;right:6px;top:8px;width:38px;height:38px;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:8px;transition:color .2s,background .2s}
+.eye:hover{color:var(--copper-d);background:rgba(217,115,63,.1)}
+input[type="password"]::-ms-reveal,input[type="password"]::-ms-clear{display:none}
+.hint{display:block;margin-top:6px;font-size:.76rem;color:var(--muted);line-height:1.45}
+.field.invalid input{border-color:var(--bad);background:#fff8f7}
+.field.invalid .hint{color:var(--bad);font-weight:500}
+.field.valid input{border-color:var(--ok)}.field.valid .lead{color:var(--ok)}
+.shake{animation:shk .35s}@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.meter{display:flex;align-items:center;gap:5px;margin-top:8px}
+.meter i{flex:1;height:5px;border-radius:3px;background:var(--line);transition:background .3s}
+.meter em{font-style:normal;font-size:.72rem;font-weight:700;margin-left:8px;min-width:46px}
+.meter[data-s="1"] i:nth-child(-n+1){background:var(--bad)}.meter[data-s="2"] i:nth-child(-n+2){background:var(--amber)}.meter[data-s="3"] i:nth-child(-n+3){background:#8cc063}.meter[data-s="4"] i{background:var(--ok)}
+.checks{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:.74rem;color:var(--muted)}
+.checks span{display:inline-flex;align-items:center;gap:5px;transition:color .2s}
+.checks span::before{content:"\25CB";font-size:.7rem}
+.checks span.ok{color:var(--ok)}.checks span.ok::before{content:"\2713";font-weight:700}
+
+.sizes{border:0;margin-bottom:16px;min-width:0}
+.sizes legend{font-size:.84rem;font-weight:600;margin-bottom:8px}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.chips label{cursor:pointer;position:relative}
+.chips input{position:absolute;opacity:0;inset:0}
+.chips span{display:flex;flex-direction:column;align-items:center;gap:5px;padding:11px 4px;border-radius:12px;border:1.5px solid var(--line);font-size:.82rem;font-weight:600;transition:all .25s}
+.chips span i{font-size:1rem;color:var(--muted);transition:color .25s}
+.chips label:hover span{border-color:var(--copper-d);transform:translateY(-2px)}
+.chips input:checked+span{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 8px 16px -8px rgba(18,21,28,.7)}
+.chips input:checked+span i{color:var(--copper-2)}
+.chips input:focus-visible+span{outline:2px solid var(--copper-d);outline-offset:2px}
+.sizes.invalid .hint{color:var(--bad);font-weight:500}
+
+.terms-wrap{margin:2px 0 18px}
+.terms{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;cursor:pointer;line-height:1.5}
+.terms input{width:16px;height:16px;margin-top:3px;accent-color:var(--copper-d);flex:0 0 auto}
+.terms a{font-weight:600;color:var(--accent-d);text-underline-offset:3px}
+.terms-wrap .hint{display:none}.terms-wrap.invalid .hint{display:block;color:var(--bad);font-weight:500}
+
+.btn{position:relative;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border:0;border-radius:40px;overflow:hidden;cursor:pointer;background:var(--copper-d);color:#fff;font-family:var(--fb);font-size:1rem;font-weight:700;letter-spacing:.3px;transition:transform .2s,box-shadow .25s,background .3s}
+.btn::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg)}
+.btn:hover{background:#a94a22;transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(196,89,43,.75)}
+.btn:hover::before{animation:shine .8s}.btn:active{transform:none}
+.btn:focus-visible{outline:3px solid var(--copper-2);outline-offset:3px}
+.btn .lbl{display:inline-flex;align-items:center;gap:10px;transition:gap .25s}.btn:hover .lbl{gap:16px}
+@keyframes shine{to{left:130%}}
+.btn .spin,.btn .done{display:none}
+.btn .spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+.btn.loading .lbl{display:none}.btn.loading .spin{display:inline-block}
+.btn.success{background:var(--ok)}.btn.success .lbl,.btn.success .spin{display:none}.btn.success .done{display:inline-flex;align-items:center;gap:10px}
+.btn:disabled{cursor:progress}@keyframes sp{to{transform:rotate(360deg)}}
+.form-status{min-height:18px;margin-top:10px;font-size:.85rem;text-align:center;color:var(--muted)}
+.form-status.err{color:var(--bad);font-weight:500}.form-status.ok{color:var(--ok);font-weight:500}
+.signup{text-align:center;margin-top:8px;font-size:.92rem;color:var(--muted)}
+.signup a{font-weight:700;color:var(--accent-d);text-underline-offset:3px}
+.secure{display:flex;justify-content:center;gap:8px;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:.76rem;color:var(--muted)}
+.secure i{color:var(--ok)}
+
+@media(max-height:780px) and (min-width:981px){.journey .team,.lead-p{display:none}.skyline{height:110px}}
+@media(max-width:980px){
+.lg{grid-template-columns:1fr}
+.lg-brand{position:relative;height:auto;padding:26px 22px 34px;gap:16px;align-items:center;text-align:center}
+.lg-logo{align-self:center}.lg-body{display:flex;flex-direction:column;align-items:center;max-width:none}
+.lead-p,.journey,.lg-stats{display:none}
+.lg-brand h1{font-size:clamp(1.8rem,7.5vw,2.6rem);margin-bottom:0}.tag{margin-bottom:14px;max-width:100%;text-align:center}
+.skyline{height:90px}.lg-form-wrap{padding:28px 16px 40px;min-height:auto}}
+@media(max-width:600px){
+.lg-card{padding:30px 20px 24px}.lg-card h2,.sub,.eyebrow,.sizes legend{text-align:center}.back{display:flex;justify-content:center}
+.row2{grid-template-columns:1fr}.sso{flex-direction:column}.chips{grid-template-columns:repeat(2,1fr)}.terms{justify-content:center}}
+@media(max-width:380px){.lg-card h2{font-size:1.7rem}.tag{font-size:.72rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}
+.ln>span,.skyline i{transform:none}.lead-p,.journey,#signupForm>*{opacity:1;transform:none}.j-bar i{width:100%}.ck{background:var(--ok)}.ck i{opacity:1}}
+</style>
+</head>
+<body>
+<main class="lg">
+
+  <!-- LEFT: brand + leasing journey (stays in view while the form scrolls) -->
+  <aside class="lg-brand" id="brandPanel">
+    <span class="grid-bg" aria-hidden="true"></span><span class="spot" aria-hidden="true"></span>
+    <span class="orb o1" aria-hidden="true"></span><span class="orb o2" aria-hidden="true"></span>
+
+    <a href="../index.html" class="lg-logo" aria-label="Stackly Commercial Realty home"><img src="../assets/stackly_logo.webp" alt="Stackly logo"></a>
+
+    <div class="lg-body">
+      <span class="tag"><i class="live"></i> 340+ verified properties live this week</span>
+      <h1><span class="ln"><span>Find, tour and lease</span></span><span class="ln"><span>commercial space with confidence.</span></span></h1>
+      <p class="lead-p">Create your client account to shortlist verified offices, retail units and warehouses, book site visits and keep every lease document in one place.</p>
+
+      <div class="journey" id="journey" aria-hidden="true">
+        <div class="j-h"><span>Your leasing journey</span><small>Guided by a broker</small></div>
+        <div class="j-bar"><i></i></div>
+        <ul class="tasks">
+          <li><span class="ck"><i class="fa-solid fa-check"></i></span>Share your space requirements</li>
+          <li><span class="ck"><i class="fa-solid fa-check"></i></span>Shortlist verified properties</li>
+          <li><span class="ck"><i class="fa-solid fa-check"></i></span>Book and attend site visits</li>
+          <li><span class="ck"><i class="fa-solid fa-check"></i></span>Negotiate terms and sign your lease</li>
+        </ul>
+        <div class="team"><div class="stack"><span class="av a1">AR</span><span class="av a2">VS</span><span class="av a3">MP</span><span class="av a4">+9</span></div><span>12 businesses signed a lease this week</span></div>
+      </div>
+    </div>
+
+    <div class="lg-stats">
+      <div><b data-count="1200" data-suffix="+">1,200+</b><span>Deals closed</span></div>
+      <div><b data-count="24" data-suffix="M">24M</b><span>Sq ft transacted</span></div>
+      <div><b data-count="98" data-suffix="%">98%</b><span>Client retention</span></div>
+    </div>
+
+    <div class="skyline" aria-hidden="true">
+      <i style="--h:60px;--d:.15s"></i><i style="--h:104px;--d:.25s"></i><i style="--h:78px;--d:.35s"></i><i style="--h:130px;--d:.2s"></i><i style="--h:92px;--d:.4s"></i><i style="--h:112px;--d:.3s"></i><i style="--h:70px;--d:.45s"></i><i style="--h:140px;--d:.1s"></i><i style="--h:96px;--d:.5s"></i><i style="--h:64px;--d:.38s"></i><i style="--h:120px;--d:.28s"></i><i style="--h:84px;--d:.48s"></i>
+    </div>
+  </aside>
+
+  <!-- RIGHT: form -->
+  <section class="lg-form-wrap">
+    <div class="lg-card">
+      <a href="./login.html" class="back"><i class="fa-solid fa-arrow-left"></i> Back to login</a>
+      <span class="eyebrow">Client account</span>
+      <h2>Create your account</h2>
+      <p class="sub">Tell us what you are looking for and a broker will help you shortlist.</p>
+
+      <form id="signupForm" novalidate>
+        <div class="sso">
+          <button type="button" data-sso="Google"><i class="fa-brands fa-google"></i> Sign up with Google</button>
+          <button type="button" data-sso="Company SSO"><i class="fa-solid fa-key"></i> Company SSO</button>
+        </div>
+        <div class="divider">or sign up with email</div>
+
+        <div class="row2">
+          <div class="field">
+            <i class="fa-solid fa-user lead" aria-hidden="true"></i>
+            <input type="text" id="fullName" name="fullName" placeholder=" " autocomplete="name" maxlength="60" spellcheck="false" required>
+            <label for="fullName">Full name</label>
+            <small class="hint" data-for="fullName">Your first and last name.</small>
+          </div>
+          <div class="field">
+            <i class="fa-solid fa-building lead" aria-hidden="true"></i>
+            <input type="text" id="company" name="company" placeholder=" " autocomplete="organization" maxlength="60" required>
+            <label for="company">Company name</label>
+            <small class="hint" data-for="company">At least 2 characters.</small>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <i class="fa-solid fa-envelope lead" aria-hidden="true"></i>
+            <input type="email" id="email" name="email" placeholder=" " autocomplete="email" maxlength="254" required>
+            <label for="email">Work email</label>
+            <small class="hint" data-for="email">We will send a confirmation link here.</small>
+          </div>
+          <div class="field">
+            <i class="fa-solid fa-phone lead" aria-hidden="true"></i>
+            <input type="tel" id="phone" name="phone" placeholder=" " autocomplete="tel-national" inputmode="numeric" maxlength="10" required>
+            <label for="phone">Mobile number</label>
+            <small class="hint" data-for="phone">10-digit Indian mobile number.</small>
+          </div>
+        </div>
+
+        <fieldset class="sizes" id="sizes">
+          <legend>I am looking for</legend>
+          <div class="chips">
+            <label><input type="radio" name="space" value="office"><span><i class="fa-solid fa-building" aria-hidden="true"></i>Office</span></label>
+            <label><input type="radio" name="space" value="retail"><span><i class="fa-solid fa-shop" aria-hidden="true"></i>Retail</span></label>
+            <label><input type="radio" name="space" value="warehouse"><span><i class="fa-solid fa-warehouse" aria-hidden="true"></i>Warehouse</span></label>
+            <label><input type="radio" name="space" value="cowork"><span><i class="fa-solid fa-people-roof" aria-hidden="true"></i>Co-working</span></label>
+          </div>
+          <small class="hint" data-for="space">This helps us match you with the right properties.</small>
+        </fieldset>
+
+        <div class="field">
+          <i class="fa-solid fa-lock lead" aria-hidden="true"></i>
+          <input type="password" id="password" name="password" placeholder=" " autocomplete="new-password" maxlength="64" required>
+          <label for="password">Password</label>
+          <button type="button" class="eye" data-target="password" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+          <div class="meter" id="meter" data-s="0" aria-hidden="true"><i></i><i></i><i></i><i></i><em id="meterText"></em></div>
+          <div class="checks" id="checks"><span data-r="len">8+ characters</span><span data-r="case">Upper &amp; lower case</span><span data-r="num">A number</span></div>
+          <small class="hint" data-for="password">No spaces. Use at least 8 characters.</small>
+        </div>
+
+        <div class="field">
+          <i class="fa-solid fa-shield-halved lead" aria-hidden="true"></i>
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder=" " autocomplete="new-password" maxlength="64" required>
+          <label for="confirmPassword">Confirm password</label>
+          <button type="button" class="eye" data-target="confirmPassword" aria-label="Show password"><i class="fa-solid fa-eye"></i></button>
+          <small class="hint" data-for="confirmPassword">Re-enter your password.</small>
+        </div>
+
+        <div class="terms-wrap">
+          <label class="terms">
+            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+            <span>I agree to the <a href="./404.html">Terms of Service</a> and <a href="./404.html">Privacy Policy</a></span>
+          </label>
+          <small class="hint" data-for="agreeTerms">You must accept the terms to create an account.</small>
+        </div>
+
+        <button type="submit" class="btn" id="signupBtn">
+          <span class="lbl">Create account <i class="fa-solid fa-arrow-right"></i></span>
+          <span class="spin" aria-hidden="true"></span>
+          <span class="done"><i class="fa-solid fa-circle-check"></i> Account created</span>
+        </button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        <p class="signup">Already have an account? <a href="./login.html">Sign in</a></p>
+      </form>
+
+      <p class="secure"><i class="fa-solid fa-shield-halved"></i> Encrypted in transit and at rest</p>
+    </div>
+  </section>
+</main>
+
+<script>
+// STACKLY COMMERCIAL REALTY — signup
+// Live-filtered fields, validation, password rules + strength meter, show/hide toggles,
+// terms gate, success state, then redirect to login.
+(function () {
+  'use strict';
+  /* ----- settings you can change ----- */
+  var SIGNUP_ENDPOINT = '';              // put your sign-up API URL here; empty = demo mode (nothing is saved)
+  var NEXT_PAGE = './login.html';
+
+  var form = document.getElementById('signupForm');
+  if (!form) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var nameEl = $('fullName'), companyEl = $('company'), emailEl = $('email'), phoneEl = $('phone');
+  var passEl = $('password'), confirmEl = $('confirmPassword'), agreeEl = $('agreeTerms');
+  var sizesEl = $('sizes'), btn = $('signupBtn'), meter = $('meter'), meterText = $('meterText'), statusEl = $('formStatus');
+  var EMAIL = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}$/;
+  var NAME = /^[\p{L}][\p{L} .'-]*$/u;
+  function setStatus(t, k) { statusEl.textContent = t; statusEl.className = 'form-status' + (k ? ' ' + k : ''); }
+
+  /* ----- hints: remember default copy so it can be restored ----- */
+  var hints = {};
+  [].forEach.call(form.querySelectorAll('.hint'), function (h) { hints[h.getAttribute('data-for')] = { el: h, text: h.textContent }; });
+  function wrapOf(el) { return el.closest('.field') || el.closest('.terms-wrap') || el.closest('.sizes'); }
+  function setState(el, key, msg) {
+    var wrap = wrapOf(el), ok = !msg;
+    wrap.classList.toggle('invalid', !ok);
+    wrap.classList.toggle('valid', ok && el.type !== 'checkbox' && el.type !== 'radio' && el.value !== '');
+    if (el.setAttribute) el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    hints[key].el.textContent = ok ? hints[key].text : msg;
+    return ok;
+  }
+
+  /* ----- rules ----- */
+  var rules = {
+    fullName: function () {
+      var v = nameEl.value.trim();
+      if (!v) return 'Please enter your full name.';
+      if (v.length < 2 || !NAME.test(v)) return 'Use letters, spaces, hyphens or apostrophes only.';
+      return '';
+    },
+    company: function () {
+      var v = companyEl.value.trim();
+      if (!v) return 'Please enter your company name.';
+      if (v.length < 2) return 'Name must be at least 2 characters.';
+      return '';
+    },
+    email: function () {
+      var v = emailEl.value.trim();
+      if (!v) return 'Please enter your email address.';
+      if (/\.\./.test(v) || !EMAIL.test(v)) return 'Enter a valid email, e.g. you@company.com.';
+      return '';
+    },
+    phone: function () {
+      var v = phoneEl.value;
+      if (!v) return 'Please enter your mobile number.';
+      if (!/^[6-9]\d{9}$/.test(v)) return 'Enter a 10-digit number starting with 6, 7, 8 or 9.';
+      return '';
+    },
+    space: function () { return form.querySelector('input[name="space"]:checked') ? '' : 'Please choose the type of space you need.'; },
+    password: function () {
+      var p = passEl.value;
+      if (!p) return 'Please create a password.';
+      if (/\s/.test(p)) return 'Password cannot contain spaces.';
+      if (p.length < 8) return 'Password must be at least 8 characters.';
+      if (!/[a-z]/.test(p) || !/[A-Z]/.test(p)) return 'Include both upper and lower case letters.';
+      if (!/\d/.test(p)) return 'Include at least one number.';
+      return '';
+    },
+    confirmPassword: function () {
+      if (!confirmEl.value) return 'Please re-enter your password.';
+      if (confirmEl.value !== passEl.value) return 'Passwords do not match.';
+      return '';
+    },
+    agreeTerms: function () { return agreeEl.checked ? '' : 'You must accept the terms to create an account.'; }
+  };
+  var els = { fullName: nameEl, company: companyEl, email: emailEl, phone: phoneEl, space: sizesEl, password: passEl, confirmPassword: confirmEl, agreeTerms: agreeEl };
+  function check(k) { return setState(els[k], k, rules[k]()); }
+
+  ['fullName', 'company', 'email', 'phone', 'password', 'confirmPassword', 'agreeTerms'].forEach(function (k) {
+    var el = els[k];
+    el.addEventListener('blur', function () { check(k); });
+    el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', function () {
+      if (wrapOf(el).classList.contains('invalid')) check(k);
+      if (k === 'password' && confirmEl.value) check('confirmPassword');
+    });
+  });
+  [].forEach.call(form.querySelectorAll('input[name="space"]'), function (r) { r.addEventListener('change', function () { check('space'); }); });
+
+  /* ----- live input filtering ----- */
+  nameEl.addEventListener('input', function () { nameEl.value = nameEl.value.replace(/[^\p{L} .'-]/gu, '').replace(/^[ .'-]+/, '').replace(/ {2,}/g, ' '); });
+  phoneEl.addEventListener('input', function () { phoneEl.value = phoneEl.value.replace(/\D/g, '').slice(0, 10); });
+  emailEl.addEventListener('input', function () { emailEl.value = emailEl.value.replace(/\s/g, ''); });
+
+  /* ----- show / hide password ----- */
+  [].forEach.call(form.querySelectorAll('.eye'), function (eye) {
+    eye.addEventListener('click', function () {
+      var input = $(eye.getAttribute('data-target')), show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      eye.innerHTML = '<i class="fa-solid ' + (show ? 'fa-eye-slash' : 'fa-eye') + '"></i>';
+      eye.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      input.focus();
+    });
+  });
+
+  /* ----- strength meter + live checklist ----- */
+  var labels = ['', 'Weak', 'Fair', 'Good', 'Strong'], colors = ['', '#d64045', '#a87408', '#5f9a3c', '#2e8b57'], ruleEls = {};
+  [].forEach.call(document.querySelectorAll('#checks span'), function (s) { ruleEls[s.getAttribute('data-r')] = s; });
+  passEl.addEventListener('input', function () {
+    var p = passEl.value, len = p.length >= 8, mixed = /[a-z]/.test(p) && /[A-Z]/.test(p), num = /\d/.test(p), sym = /[^A-Za-z0-9]/.test(p), s = 0;
+    ruleEls.len.classList.toggle('ok', len); ruleEls.case.classList.toggle('ok', mixed); ruleEls.num.classList.toggle('ok', num);
+    if (p) { s = 1; if (len) s = 2; if (len && mixed && num) s = 3; if (len && mixed && num && sym && p.length >= 10) s = 4; }
+    meter.setAttribute('data-s', s); meterText.textContent = labels[s]; meterText.style.color = colors[s];
+  });
+
+  /* ----- single sign-on (not connected yet) ----- */
+  [].forEach.call(document.querySelectorAll('.sso button'), function (b) {
+    b.addEventListener('click', function () { setStatus(b.getAttribute('data-sso') + ' sign-up is not set up yet. Please use email and password.', ''); });
+  });
+
+  /* ----- submit ----- */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); setStatus('', '');
+    var firstBad = null;
+    Object.keys(els).forEach(function (k) { if (!check(k) && !firstBad) firstBad = k; });
+    if (firstBad) {
+      var w = wrapOf(els[firstBad]);
+      w.classList.remove('shake'); void w.offsetWidth; w.classList.add('shake');
+      (firstBad === 'space' ? form.querySelector('input[name="space"]') : els[firstBad]).focus({ preventScroll: true });
+      w.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      setStatus('Please correct the highlighted fields.', 'err');
+      return;
+    }
+    btn.disabled = true; btn.classList.add('loading');
+    var payload = { name: nameEl.value.trim(), company: companyEl.value.trim(), email: emailEl.value.trim(), phone: phoneEl.value, space: form.querySelector('input[name="space"]:checked').value, password: passEl.value };
+    var request = SIGNUP_ENDPOINT
+      ? fetch(SIGNUP_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then(function (r) { if (!r.ok) throw new Error('Sign-up failed'); return r; })
+      : new Promise(function (resolve) { setTimeout(resolve, 900); });     // demo mode: set SIGNUP_ENDPOINT to go live
+    request.then(function () {
+      btn.classList.remove('loading'); btn.classList.add('success');
+      setStatus('Account created. Taking you to sign in.', 'ok');
+      setTimeout(function () { window.location.href = NEXT_PAGE; }, 1100);
+    }).catch(function () {
+      btn.classList.remove('loading'); btn.disabled = false;
+      setStatus('We could not create your account. Please try again.', 'err');
+    });
+  });
+
+  /* ----- count-up stats ----- */
+  [].forEach.call(document.querySelectorAll('.lg-stats b'), function (el, i) {
+    if (reduce) return;
+    var end = parseFloat(el.dataset.count), suf = el.dataset.suffix || '', start = null;
+    el.textContent = '0' + suf;
+    function step(t) { if (!start) start = t; var p = Math.min(1, (t - start) / 1500); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))).toLocaleString('en-IN') + suf; if (p < 1) requestAnimationFrame(step); }
+    setTimeout(function () { requestAnimationFrame(step); }, 900 + i * 150);
+  });
+
+  /* ----- spotlight + parallax on the brand panel (desktop only) ----- */
+  var panel = $('brandPanel'), card = $('journey');
+  if (panel && canHover && !reduce) {
+    panel.addEventListener('mousemove', function (e) {
+      var r = panel.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      panel.style.setProperty('--mx', (x * 100).toFixed(1) + '%'); panel.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+      if (card) card.style.transform = 'translate(' + ((x - 0.5) * -14).toFixed(1) + 'px,' + ((y - 0.5) * -12).toFixed(1) + 'px)';
+    });
+    panel.addEventListener('mouseleave', function () { if (card) card.style.transform = ''; });
+  }
+})();
+</script>
+</body>
+</html>

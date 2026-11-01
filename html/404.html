@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#12151c">
+<meta name="robots" content="noindex">
+<title>Page not found | Stackly Commercial Realty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* STACKLY COMMERCIAL REALTY — 404 (charcoal ink + copper) */
+:root{--ink:#12151c;--ink-3:#283046;--copper:#d9733f;--copper-2:#ee9a6b;--copper-d:#c4592b;--stone:#f6f2ec;--w80:rgba(246,242,236,.8);--w60:rgba(246,242,236,.6);--w15:rgba(246,242,236,.15);--w08:rgba(246,242,236,.07);--fh:'Playfair Display',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif;--ease:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;max-width:100%;overflow-x:hidden}
+@supports(overflow:clip){html,body{overflow-x:clip}}
+body{font-family:var(--fb);color:var(--stone);background:linear-gradient(155deg,var(--ink),#0c0f15);-webkit-font-smoothing:antialiased;line-height:1.5}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--copper-2);outline-offset:3px}
+.wrap{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:calc(28px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px))}
+.grid-bg{position:absolute;inset:0;z-index:-2;background:linear-gradient(var(--w08) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,var(--w08) 1px,transparent 1px) 0 0/48px 48px;-webkit-mask-image:radial-gradient(circle at 50% 40%,#000,transparent 70%);mask-image:radial-gradient(circle at 50% 40%,#000,transparent 70%)}
+.spot{position:absolute;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(460px circle at var(--mx,50%) var(--my,35%),rgba(217,115,63,.22),transparent 62%)}
+.orb{position:absolute;z-index:-2;width:440px;height:440px;border-radius:50%;filter:blur(90px);background:rgba(217,115,63,.18);top:-160px;right:-140px;animation:drift 12s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(-50px,40px) scale(1.12)}}
+.logo img{height:48px;width:auto;display:block}
+main{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;max-width:620px;padding:24px 0 150px}
+.tag{display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;font-size:.78rem;font-weight:500;border:1px solid var(--w60);background:var(--w08);margin-bottom:18px}
+.live{width:8px;height:8px;border-radius:50%;background:var(--copper-2);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(238,154,107,.7)}70%,100%{box-shadow:0 0 0 9px rgba(238,154,107,0)}}
+.code{position:relative;font-family:var(--fh);font-weight:700;font-size:clamp(6rem,22vw,11rem);line-height:1;letter-spacing:-.02em;display:flex;align-items:center;justify-content:center;gap:.02em}
+.code span{display:inline-block;opacity:0;transform:translateY(40px);animation:up .9s var(--ease) forwards}
+.code span:nth-child(2){animation-delay:.12s;color:var(--copper-2)}
+.code span:nth-child(3){animation-delay:.24s}
+@keyframes up{to{opacity:1;transform:none}}
+.sign{position:absolute;top:-6px;right:clamp(-30px,-2vw,-6px);transform-origin:top center;padding:6px 12px;border-radius:8px;background:var(--copper-d);color:#fff;font-family:var(--fb);font-size:clamp(.6rem,1.6vw,.78rem);font-weight:700;letter-spacing:1.2px;text-transform:uppercase;box-shadow:0 14px 26px -10px rgba(0,0,0,.6);animation:swing 3.2s ease-in-out 1.1s infinite alternate;opacity:0;animation-fill-mode:forwards}
+.sign::before{content:"";position:absolute;left:50%;top:-10px;width:2px;height:10px;background:var(--w60)}
+@keyframes swing{0%{opacity:1;transform:rotate(7deg)}100%{opacity:1;transform:rotate(-7deg)}}
+h1{font-family:var(--fh);font-size:clamp(1.6rem,4vw,2.3rem);font-weight:700;line-height:1.2;margin:14px 0 10px}
+.msg{font-weight:300;line-height:1.75;color:var(--w80);max-width:480px;opacity:0;animation:fade .8s .5s forwards}
+@keyframes fade{to{opacity:1}}
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px;opacity:0;animation:fade .8s .7s forwards}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 26px;border-radius:40px;font-weight:700;font-size:.95rem;text-decoration:none;border:1.5px solid var(--copper-d);background:var(--copper-d);color:#fff;transition:transform .2s,box-shadow .25s,background .25s}
+.btn::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg)}
+.btn:hover{background:#a94a22;transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(196,89,43,.8)}.btn:hover::before{animation:shine .8s}
+@keyframes shine{to{left:130%}}
+.btn.ghost{background:transparent;border-color:var(--w60);color:var(--stone)}
+.btn.ghost:hover{background:var(--w08);border-color:var(--copper-2);box-shadow:none}
+.links{display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:center;margin-top:24px;font-size:.88rem;color:var(--w60);opacity:0;animation:fade .8s .9s forwards}
+.links a{text-decoration:none;background:linear-gradient(var(--copper-2),var(--copper-2)) 0 100%/0 2px no-repeat;transition:background-size .3s,color .2s;padding-bottom:2px}
+.links a:hover{color:var(--stone);background-size:100% 2px}
+.skyline{position:absolute;left:0;right:0;bottom:0;z-index:1;height:170px;display:flex;align-items:flex-end;gap:6px;padding:0 10px;opacity:.5;pointer-events:none;-webkit-mask-image:linear-gradient(0deg,#000 30%,transparent 100%);mask-image:linear-gradient(0deg,#000 30%,transparent 100%)}
+.skyline i{position:relative;flex:1;height:var(--h);border-radius:3px 3px 0 0;background:linear-gradient(180deg,#2b3550,#161b26);transform-origin:bottom;transform:scaleY(0);animation:grow 1.2s var(--ease) var(--d) forwards}
+.skyline i::before{content:"";position:absolute;inset:8px 5px 0;opacity:.1;background:radial-gradient(circle,var(--copper-2) 1.4px,transparent 2px) 0 0/9px 12px;animation:twinkle 4.5s ease-in-out var(--d) infinite alternate}
+@keyframes grow{to{transform:none}}@keyframes twinkle{50%{opacity:.75}}
+footer{position:relative;z-index:2;font-size:.78rem;color:var(--w60)}
+@media(max-width:480px){.actions{flex-direction:column;width:100%}.btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.code span,.msg,.actions,.links,.sign{opacity:1;transform:none}.skyline i{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+  <span class="grid-bg" aria-hidden="true"></span><span class="spot" aria-hidden="true"></span><span class="orb" aria-hidden="true"></span>
+
+  <a href="../index.html" class="logo" aria-label="Stackly Commercial Realty home"><img src="../assets/stackly_logo.webp" alt="Stackly logo"></a>
+
+  <main>
+    <span class="tag"><i class="live"></i> Error 404 &middot; Page not found</span>
+    <div class="code" aria-hidden="true"><span>4</span><span>0</span><span>4</span><b class="sign">For lease</b></div>
+    <h1>This space is currently vacant.</h1>
+    <p class="msg">The page you are looking for has moved, been leased out, or never existed. Let us get you back to somewhere with an address.</p>
+    <div class="actions">
+      <a href="../index.html" class="btn">Back to home</a>
+      <a href="./login.html" class="btn ghost">Sign in to portal</a>
+    </div>
+    <nav class="links" aria-label="Helpful links">
+      <a href="./signup.html">Create an account</a>
+      <a href="../index.html#properties">Browse properties</a>
+      <a href="mailto:hello@stackly.ai?subject=Broken%20link">Report a broken link</a>
+    </nav>
+  </main>
+
+  <div class="skyline" aria-hidden="true">
+    <i style="--h:60px;--d:.15s"></i><i style="--h:110px;--d:.25s"></i><i style="--h:80px;--d:.35s"></i><i style="--h:140px;--d:.2s"></i><i style="--h:96px;--d:.4s"></i><i style="--h:124px;--d:.3s"></i><i style="--h:72px;--d:.45s"></i><i style="--h:156px;--d:.1s"></i><i style="--h:98px;--d:.5s"></i><i style="--h:66px;--d:.38s"></i><i style="--h:128px;--d:.28s"></i><i style="--h:86px;--d:.48s"></i><i style="--h:112px;--d:.18s"></i><i style="--h:70px;--d:.42s"></i>
+  </div>
+  <footer>&copy; <span id="yr">2026</span> Stackly Commercial Realty</footer>
+</div>
+<script>
+(function () {
+  'use strict';
+  var wrap = document.getElementById('wrap');
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduce || !canHover) return;
+  wrap.addEventListener('mousemove', function (e) {
+    var r = wrap.getBoundingClientRect();
+    wrap.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+    wrap.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+  });
+})();
+</script>
+</body>
+</html>
