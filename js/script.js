@@ -98,6 +98,18 @@ onScroll();
 
 // ---------- MOBILE NAV ----------
 const navToggle = $('#navToggle'), navClose = $('#navClose'), navLinks = $('#navLinks');
+
+// Put the logo inside the full-screen mobile menu (it covers the header logo).
+// Cloned from the header brand so the image path is right on every page. Hidden on desktop via CSS.
+(function () {
+  const brand = $('#site-header .brand');
+  if (!brand || !navLinks || $('.nav-brand', navLinks)) return;
+  const logo = brand.cloneNode(true);
+  logo.classList.add('nav-brand');
+  logo.removeAttribute('aria-hidden');
+  navLinks.insertBefore(logo, navLinks.firstChild);
+})();
+
 function setMenu(open) {
   navLinks.classList.toggle('open', open);
   navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -160,7 +172,7 @@ function applyFilter(type, scroll) {
 }
 chips.forEach((c) => c.addEventListener('click', () => applyFilter(c.dataset.filter, false)));
 const heroSearch = $('#heroSearch');
-if (heroSearch) heroSearch.addEventListener('submit', (e) => { e.preventDefault(); location.href = './html/listings.html?type=' + encodeURIComponent($('#hsType').value); });
+if (heroSearch) heroSearch.addEventListener('submit', (e) => { e.preventDefault(); location.href = './html/404.html'; });
 if ($('#listingGrid') && chips.length) {
   const wanted = new URLSearchParams(location.search).get('type');
   if (wanted && wanted !== 'all' && chips.some((c) => c.dataset.filter === wanted)) applyFilter(wanted, false);
